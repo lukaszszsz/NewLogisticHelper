@@ -1,0 +1,11 @@
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.deps.json
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.dll
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\ref\LogisticHelper.Models.dll
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.pdb
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.GeneratedMSBuildEditorConfig.editorconfig
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.AssemblyInfoInputs.cache
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.AssemblyInfo.cs
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.csproj.CoreCompileInputs.cache
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.dll
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\ref\LogisticHelper.Models.dll
+N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.pdb
