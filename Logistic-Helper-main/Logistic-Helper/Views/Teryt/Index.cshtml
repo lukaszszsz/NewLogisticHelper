@@ -1,9 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Teryt";
 }
+        <label>Wyszukaj Miejscowość</label>
+           @* <input asp-for = "" class = "form-control"/>
+            <span asp-validation-for="NAZWISKO" class= "text-danger"></span>
+            *@
+            <button type= "submit" class = "btn btn-primary" style = "width:150px">Search</button>
+@*Show me voivodeships*@
+<table>
+
+
 @foreach(var voivode in Model)
 {
-    
-    <p>@voivode.NAZWA</p>
-    
+    <tr>
+        <td>
+            @voivode.NAZWA
+        </td>
+        <td>
+         <div class = "w-75 btn-group" role = "group">
+            <a asp-controller = "Teryt" asp-action ="Details" asp-route-id="@voivode.WOJ" class = "btn btn-primary">
+                <i class="bi bi-pen"></i> Wybierz</a>
+        </div>
+        </td>
+    </tr>
 }
+</table>

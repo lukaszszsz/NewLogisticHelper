@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+<h1>Witaj w detalach</h1>
+
+@foreach(var powiat in Model)
+{
+      <tr>
+        <td>
+            @powiat.NAZWA
+        </td>
+        <td>
+            @foreach(var gmina in Model)
+            {
+                <p>gmina.</p>
+            }
+
+        </td>
+    </tr>
+}
+}
+<p>@Model[1].NAZWA</p>

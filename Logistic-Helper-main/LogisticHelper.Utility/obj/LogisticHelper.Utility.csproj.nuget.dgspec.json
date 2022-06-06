@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {}
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {}
   },
   "projects": {
-    "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
+        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
         "projectName": "LogisticHelper.Utility",
-        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
+        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
         "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
-        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Utility\\obj\\",
+        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "P:\\Visual\\Shared\\NuGetPackages"
@@ -43,6 +43,22 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj": {}
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj": {}
   },
   "projects": {
-    "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj": {
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
         "projectName": "LogisticHelper",
-        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
         "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
-        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\Logistic-Helper\\obj\\",
+        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "P:\\Visual\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
-                "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj"
+              "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
+                "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj"
               },
-              "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
-                "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
+              "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
+                "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
               }
             }
           }
@@ -56,6 +56,12 @@
               "version": "[7.0.0-preview.4.22229.2, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
             },
@@ -110,14 +116,14 @@
         }
       }
     },
-    "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj",
+        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj",
         "projectName": "LogisticHelper.DataAccess",
-        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj",
+        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj",
         "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
-        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.DataAccess\\obj\\",
+        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "P:\\Visual\\Shared\\NuGetPackages"
@@ -138,8 +144,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
-                "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
+              "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
+                "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
               }
             }
           }
@@ -155,6 +161,16 @@
           "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
             }
@@ -178,14 +194,14 @@
         }
       }
     },
-    "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
+        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
         "projectName": "LogisticHelper.Models",
-        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
+        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
         "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
-        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\Logistic-Helper-main\\LogisticHelper.Models\\obj\\",
+        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "P:\\Visual\\Shared\\NuGetPackages"
@@ -217,6 +233,22 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0-preview.4.22229.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
