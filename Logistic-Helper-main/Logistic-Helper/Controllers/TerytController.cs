@@ -23,16 +23,17 @@ namespace LogisticHelper.Controllers
             client.ClientCredentials.UserName.Password = "so6QT8ahG";
             client.OpenAsync().Wait();
 
+            DateTime date =new DateTime(2020,06,06);
 
-            var result = client.CzyZalogowanyAsync();
 
-         
+            var dd = client.PobierzKatalogTERCAsync(date);
+
 
 
            //var cos =  client.PobierzListeMiejscowosciWGminieAsync( "śląskie", "gliwicki","gierałtowice",DateTime.Now).Result;
-           var wojewodztwa = client.PobierzListeWojewodztwAsync(DateTime.Now).Result;
-         
-                return View(wojewodztwa);
+            var wojewodztwa = client.PobierzListeWojewodztwAsync(DateTime.Now).Result;
+
+            return View(wojewodztwa);
 
 
 
