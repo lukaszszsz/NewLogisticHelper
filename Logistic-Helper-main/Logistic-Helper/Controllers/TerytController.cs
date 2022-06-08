@@ -16,24 +16,18 @@ namespace LogisticHelper.Controllers
         // GET: TerytController
         public ActionResult Index()
         {
-            serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();
+          /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
 
 
-            client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
-            client.ClientCredentials.UserName.Password = "so6QT8ahG";
-            client.OpenAsync().Wait();
-
-            DateTime date =new DateTime(2020,06,06);
-
-
-            var dd = client.PobierzKatalogTERCAsync(date);
+           
 
 
 
            //var cos =  client.PobierzListeMiejscowosciWGminieAsync( "śląskie", "gliwicki","gierałtowice",DateTime.Now).Result;
-            var wojewodztwa = client.PobierzListeWojewodztwAsync(DateTime.Now).Result;
-
-            return View(wojewodztwa);
+            //LINQ To get correct data
+           
+            
+            return View();
 
 
 
@@ -42,19 +36,8 @@ namespace LogisticHelper.Controllers
         // GET: TerytController/Details/5
         public ActionResult Details(int id)
         {
-            serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();
-
-
-            client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
-            client.ClientCredentials.UserName.Password = "so6QT8ahG";
-            client.OpenAsync().Wait();
-            
            
-                string voivode = id.ToString();
-            var getGmina = client.PobierzGminyiPowDlaWojAsync(voivode,DateTime.Now).Result;
-
-
-            return View(getGmina);
+            return View();
         }
 
         // GET: TerytController/Create
@@ -68,15 +51,7 @@ namespace LogisticHelper.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //Trzeba zrobić listę ze wszystkimi miastami :/
-        /*public ActionResult Search(string city)
-        {
-            serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();
-
-            client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
-            client.ClientCredentials.UserName.Password = "so6QT8ahG";
-            client.OpenAsync().Wait();
-           
-        }*/
+       
 
         // GET: TerytController/Edit/5
         public ActionResult Edit(int id)
