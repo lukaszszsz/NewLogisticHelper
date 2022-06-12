@@ -11,5 +11,6 @@ namespace LogisticHelper.DataAccess
         }
 
         public DbSet<Uzytkownik> Uzytkownik { get; set; }
+        public DbSet<Terc> Terc { get; set; }
     }
 }

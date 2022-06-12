@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ServiceModel;
+using System.Linq;
+
 
 namespace LogisticHelper.Controllers
 {

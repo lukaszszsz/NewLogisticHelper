@@ -5,10 +5,10 @@
            @* <input asp-for = "" class = "form-control"/>
             <span asp-validation-for="NAZWISKO" class= "text-danger"></span>
             *@
-            <button type= "submit" class = "btn btn-primary" style = "width:150px">Search</button>
+            <button type= "submit" asp-controller="Teryt" asp-action="Search" class = "btn btn-primary" style = "width:150px">Szukaj lokalizacji</button>
 @*Show me voivodeships*@
-<table class="table table-bordered table-stripped" style= "width:100%;">
-    <thead>
+@*<table class="table table-bordered table-stripped" style= "width:100%;">*@
+    @*<thead>
         <tr>
             <th>
                WOJ
@@ -39,7 +39,7 @@
     </thead>
     <tbody>
         @*Loop to get data from database*@
-        @foreach(var obj in Model)
+    @*    @foreach(var obj in Model)
         {
             <tr>
                 <td width= "10%">
@@ -73,4 +73,4 @@
         }
     </tbody>
 
-</table>
+</table>*@

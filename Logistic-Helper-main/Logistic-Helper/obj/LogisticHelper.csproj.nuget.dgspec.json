@@ -89,6 +89,10 @@
               "target": "Package",
               "version": "[4.8.*, )"
             },
+            "jQuery.UI.Combined": {
+              "target": "Package",
+              "version": "[1.13.1, )"
+            },
             "mongocsharpdriver": {
               "target": "Package",
               "version": "[2.15.1, )"
@@ -173,6 +177,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "jQuery.UI.Combined": {
+              "target": "Package",
+              "version": "[1.13.1, )"
             }
           },
           "imports": [
@@ -247,6 +255,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "jQuery.UI.Combined": {
+              "target": "Package",
+              "version": "[1.13.1, )"
             }
           },
           "imports": [
