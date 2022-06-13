@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LogisticHelper.Controllers
 {
-    public class UzytkownikController : Controller
+    public class UserController : Controller
     {
       
-        // GET: UzytkownikController
+        // GET: UserController
         private readonly IUnitOfWork _unitOfWork;
-        public UzytkownikController(IUnitOfWork unitOfWork)
+        public UserController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
 
@@ -21,28 +21,28 @@ namespace LogisticHelper.Controllers
         public IActionResult Index()
         {
            
-            IEnumerable<Uzytkownik> objUzytkownikList = _unitOfWork.Uzytkownik.GetAll();
-            return View(objUzytkownikList);
+            //IEnumerable<User> objUserList = _unitOfWork.User.GetAll();
+            return View();
         }
-        // GET: UzytkownikController/Create
+        // GET: UserController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UzytkownikController/Create
+        // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Uzytkownik obj)
+        public ActionResult Create(User obj)
         {
             /*Some errors for fun*/
-            if (obj.NAZWISKO == obj.IMIE)
+            if (obj.LAST_NAME == obj.NAME)
             {
                 ModelState.AddModelError("IdenticalNameToCustomName", "Rodzina bardzo kogoś nie kocha");
 
 
             }
-            if (obj.IMIE == null)
+            if (obj.NAME == null)
             {
                 ModelState.AddModelError("name", "Nazwa nie może być pusta! :/");
             }
@@ -50,15 +50,15 @@ namespace LogisticHelper.Controllers
             /*if everything correct, create row and go to index*/
             if (ModelState.IsValid)
             {
-                _unitOfWork.Uzytkownik.Add(obj);
+                _unitOfWork.User.Add(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Uzytkownik created successfully";
+                TempData["success"] = "User created successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
 
-        // GET: UzytkownikController/Edit/5
+        // GET: UserController/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -66,29 +66,29 @@ namespace LogisticHelper.Controllers
                 return NotFound();
             }
 
-            var getUzytkownik = _unitOfWork.Uzytkownik.GetFirstOrDefault(u => u.ID == id);
+            var getUser = _unitOfWork.User.GetFirstOrDefault(u => u.ID == id);
 
-            if (getUzytkownik == null)
+            if (getUser == null)
             {
                 return NotFound();
             }
-            return View(getUzytkownik);
+            return View(getUser);
         }
 
-        // POST: UzytkownikController/Edit/5
+        // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Uzytkownik entity)
+        public ActionResult Edit(User entity)
         {
-            if (entity.IMIE == null)
+            if (entity.NAME == null)
             {
                 ModelState.AddModelError("NullName", "Name cannot be empty :(");
             }
             if (ModelState.IsValid)
             {
-                _unitOfWork.Uzytkownik.Update(entity);
+                _unitOfWork.User.Update(entity);
                 _unitOfWork.Save();
-                TempData["success"] = "Uzytkownik got edited";
+                TempData["success"] = "User got edited";
                 return RedirectToAction("Index");
             }
             return View(entity);
@@ -96,33 +96,33 @@ namespace LogisticHelper.Controllers
 
         }
 
-        // GET: UzytkownikController/Delete/5
+        // GET: UserController/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null || id == 0)
                 return NotFound();
-            var getUzytkownikToDelete = _unitOfWork.Uzytkownik.GetFirstOrDefault(u => u.ID == id);
+            var getUserToDelete = _unitOfWork.User.GetFirstOrDefault(u => u.ID == id);
 
-            if (getUzytkownikToDelete == null)
+            if (getUserToDelete == null)
                 return NotFound();
 
 
-            return View(getUzytkownikToDelete);
+            return View(getUserToDelete);
         }
 
-        // POST: UzytkownikController/Delete/5
+        // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            var obj = _unitOfWork.Uzytkownik.GetFirstOrDefault(u => u.ID == id); ;
+            var obj = _unitOfWork.User.GetFirstOrDefault(u => u.ID == id); ;
             if (obj == null)
             {
                 return NotFound();
             }
-            _unitOfWork.Uzytkownik.Remove(obj);
+            _unitOfWork.User.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "Uzytkownik deleted successfully";
+            TempData["success"] = "User deleted successfully";
 
             return RedirectToAction("Index");
         }

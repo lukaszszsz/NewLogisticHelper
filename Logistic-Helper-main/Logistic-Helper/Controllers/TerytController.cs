@@ -1,35 +1,39 @@
 ﻿using LogisticHelper.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ServiceModel;
+using System;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
+using LogisticHelper.DataAccess;
+using LogisticHelper.Models;
 
 namespace LogisticHelper.Controllers
 {
     public class TerytController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private DbContext Context { get; }
         public TerytController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+           
 
         }
         // GET: TerytController
-        public ActionResult Index()
+        public IActionResult Index()
         {
-          /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
-
-
-           
+            /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
 
 
 
-           //var cos =  client.PobierzListeMiejscowosciWGminieAsync( "śląskie", "gliwicki","gierałtowice",DateTime.Now).Result;
+
+            IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
+
+            //var cos =  client.PobierzListeMiejscowosciWGminieAsync( "śląskie", "gliwicki","gierałtowice",DateTime.Now).Result;
             //LINQ To get correct data
-           
-            
-            return View();
+
+
+            return View(objTercList);
 
 
 
@@ -42,10 +46,38 @@ namespace LogisticHelper.Controllers
             return View();
         }
 
-        // GET: TerytController/Create
-        public ActionResult Search()
+        // GET: TerytController/Search
+        public IActionResult Search()
         {
           
+            return View();
+        }
+
+
+        //AUTOCOMPLETE FUNCTION FOR SEARCH PURPOSES
+
+        [HttpPost]
+        public JsonResult AutoComplete(string input)
+       {
+
+            //_unitOfWork.User.GetFirstOrDefault(u => u.ID == id);
+          IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
+
+            var search =  (from Terc in objTercList
+                           where                         
+                            Terc.NAZWA.StartsWith(input)
+                           select new
+                           {
+                               label = Terc.NAZWA,
+                               val = Terc.NAZWA
+                           }).Take(5).ToList();
+            return Json(search);
+        }
+
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            ViewBag.Message = "Selected GMI Name: " + search;
             return View();
         }
 

@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace LogisticHelper.Models
 {
+    [Table("Terc", Schema = "Terc")]
+    [Keyless]
+
     public class Terc
     {
         public int WOJ { get; set; }

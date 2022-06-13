@@ -5,7 +5,8 @@ namespace LogisticHelper.Repository.IRepository
     
     public interface IUnitOfWork
     {
-        IUzytkownikRepository Uzytkownik{get;}
+        IUserRepository User{get;}
+        ITercRepository Terc{get;}
 
     void Save();
 

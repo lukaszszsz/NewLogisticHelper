@@ -4893,8 +4893,8 @@ namespace serviceteryt
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AdresoBudynkiMieszkania", Namespace="http://schemas.datacontract.org/2004/07/TerytUslugaWs1")]
-    public partial class AdresoBudynkiMieszkania : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="AdresoBudynkNAMEszkania", Namespace="http://schemas.datacontract.org/2004/07/TerytUslugaWs1")]
+    public partial class AdresoBudynkNAMEszkania : object
     {
         
         private string CechaField;
@@ -5491,7 +5491,7 @@ namespace serviceteryt
         System.Threading.Tasks.Task<serviceteryt.AdresoBudynki[]> AdresBudynkowAsync(string woj, string pow, string gmi, string rodz, string symbolMsc, string SymUl);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITerytWs1/AdresBudynkowMieszkania", ReplyAction="http://tempuri.org/ITerytWs1/AdresBudynkowMieszkaniaResponse")]
-        System.Threading.Tasks.Task<serviceteryt.AdresoBudynkiMieszkania[]> AdresBudynkowMieszkaniaAsync(string woj, string pow, string gmi, string rodz, string symbolMsc, string SymUl);
+        System.Threading.Tasks.Task<serviceteryt.AdresoBudynkNAMEszkania[]> AdresBudynkowMieszkaniaAsync(string woj, string pow, string gmi, string rodz, string symbolMsc, string SymUl);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITerytWs1/ZbiorObiektowZZ", ReplyAction="http://tempuri.org/ITerytWs1/ZbiorObiektowZZResponse")]
         System.Threading.Tasks.Task<serviceteryt.PlikZbioryNOBC> ZbiorObiektowZZAsync(string woj, string pow, string gmi, string rodz, string formatDanych, System.DateTime DataStanu);
@@ -5508,8 +5508,8 @@ namespace serviceteryt
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITerytWs1/AdresyBudynkowZLiczbaMieszkan", ReplyAction="http://tempuri.org/ITerytWs1/AdresyBudynkowZLiczbaMieszkanResponse")]
         System.Threading.Tasks.Task<serviceteryt.PlikZbioryNOBC> AdresyBudynkowZLiczbaMieszkanAsync(string woj, string pow, string gmi, string rodz, string formatDanych, System.DateTime DataStanu);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITerytWs1/AdresyBudynkowImieszkania", ReplyAction="http://tempuri.org/ITerytWs1/AdresyBudynkowImieszkaniaResponse")]
-        System.Threading.Tasks.Task<serviceteryt.PlikZbioryNOBC> AdresyBudynkowImieszkaniaAsync(string woj, string pow, string gmi, string rodz, string formatDanych, System.DateTime DataStanu);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITerytWs1/AdresyBudynkowNAMEszkania", ReplyAction="http://tempuri.org/ITerytWs1/AdresyBudynkowNAMEszkaniaResponse")]
+        System.Threading.Tasks.Task<serviceteryt.PlikZbioryNOBC> AdresyBudynkowNAMEszkaniaAsync(string woj, string pow, string gmi, string rodz, string formatDanych, System.DateTime DataStanu);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -6002,7 +6002,7 @@ namespace serviceteryt
             return base.Channel.AdresBudynkowAsync(woj, pow, gmi, rodz, symbolMsc, SymUl);
         }
         
-        public System.Threading.Tasks.Task<serviceteryt.AdresoBudynkiMieszkania[]> AdresBudynkowMieszkaniaAsync(string woj, string pow, string gmi, string rodz, string symbolMsc, string SymUl)
+        public System.Threading.Tasks.Task<serviceteryt.AdresoBudynkNAMEszkania[]> AdresBudynkowMieszkaniaAsync(string woj, string pow, string gmi, string rodz, string symbolMsc, string SymUl)
         {
             return base.Channel.AdresBudynkowMieszkaniaAsync(woj, pow, gmi, rodz, symbolMsc, SymUl);
         }
@@ -6032,9 +6032,9 @@ namespace serviceteryt
             return base.Channel.AdresyBudynkowZLiczbaMieszkanAsync(woj, pow, gmi, rodz, formatDanych, DataStanu);
         }
         
-        public System.Threading.Tasks.Task<serviceteryt.PlikZbioryNOBC> AdresyBudynkowImieszkaniaAsync(string woj, string pow, string gmi, string rodz, string formatDanych, System.DateTime DataStanu)
+        public System.Threading.Tasks.Task<serviceteryt.PlikZbioryNOBC> AdresyBudynkowNAMEszkaniaAsync(string woj, string pow, string gmi, string rodz, string formatDanych, System.DateTime DataStanu)
         {
-            return base.Channel.AdresyBudynkowImieszkaniaAsync(woj, pow, gmi, rodz, formatDanych, DataStanu);
+            return base.Channel.AdresyBudynkowNAMEszkaniaAsync(woj, pow, gmi, rodz, formatDanych, DataStanu);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

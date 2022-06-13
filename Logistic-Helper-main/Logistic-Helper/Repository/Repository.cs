@@ -1,6 +1,7 @@
 ﻿using LogisticHelper.DataAccess;
 using LogisticHelper.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace LogisticHelper.Repository
@@ -38,15 +39,16 @@ namespace LogisticHelper.Repository
                 return query.FirstOrDefault();
             }
 
-            public void Remove(T entity)
-            {
-                dbSet.Remove(entity);
-            }
+        public void Remove(T entity)
+        {
+            dbSet.Remove(entity);
+        }
 
-            public void RemoveRange(IEnumerable<T> entity)
-            {
-                dbSet.RemoveRange(entity);
-            }
-        
+        public void RemoveRange(IEnumerable<T> entity)
+        {
+            dbSet.RemoveRange(entity);
+        }
+
+       
     }
 }

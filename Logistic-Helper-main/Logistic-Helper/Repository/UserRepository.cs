@@ -4,20 +4,20 @@ using LogisticHelper.DataAccess;
 
 namespace LogisticHelper.Repository
 {
-    public class UzytkownikRepository : Repository<Uzytkownik>, IUzytkownikRepository
+    public class UserRepository : Repository<User>, IUserRepository
 
     {
         private ApplicationDbContext _db;
 
-        public UzytkownikRepository(ApplicationDbContext db):base(db)
+        public UserRepository(ApplicationDbContext db):base(db)
         {
             _db = db;
         }
  
 
-        public void Update(Uzytkownik obj)
+        public void Update(User obj)
         {
-            _db.Uzytkownik.Update(obj);
+            _db.User.Update(obj);
         }
     }
 }

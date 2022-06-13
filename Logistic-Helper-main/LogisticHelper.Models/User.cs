@@ -3,20 +3,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LogisticHelper.Models
 {
-    public class Uzytkownik
+    public class User
     {
         [Key]
         public int ID { get; set; }
         [Required]
-        public string NAZWISKO { get; set; }
+        public string LAST_NAME { get; set; }
         [Required]
-        public string IMIE { get; set; }
+        public string NAME { get; set; }
         [Required]
-        public DateTime DATA_URODZENIA { get; set; }
+        public DateTime DATE_OF_BIRTH { get; set; }
         [Required]
         public string MAIL { get; set; }
 
-        public string TELEFON { get; set; }
+        public string PHONE { get; set; }
 
     }
 }

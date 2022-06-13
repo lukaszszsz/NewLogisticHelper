@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Uzytkownik";
+    ViewData["Title"] = "User";
 }
 
-<h1>Hej, łelkom na Uzytkowniku</h1>
+<h1>Hej, łelkom na Useru</h1>
 
 
 
@@ -14,7 +14,7 @@
 
         </div>
         <div class= "col-6 text-end">
-            <a asp-controller="Uzytkownik" asp-action= "Create" class = "btn btn-primary"> Create New Uzytkownik <i class="bi bi-plus-circle"></i></a>
+            <a asp-controller="User" asp-action= "Create" class = "btn btn-primary"> Create New User <i class="bi bi-plus-circle"></i></a>
 
         </div>
     </div>
@@ -24,17 +24,17 @@
 
 @*Table which shows Category inside*@
 
-<table class="table table-bordered table-stripped" style= "width:100%;">
+@*<table class="table table-bordered table-stripped" style= "width:100%;">
     <thead>
         <tr>
             <th>
                ID
             </th>
             <th>
-                Nazwisko
+                LAST_NAME
             </th>
                <th>
-               Imie
+               NAME
             </th>
             <th>
                 Data Urodzenia
@@ -43,7 +43,7 @@
                Mail
             </th>
             <th>
-                Telefon
+                PHONE
             </th>
             <th>
                 Edit
@@ -54,7 +54,7 @@
         </tr>
     </thead>
     <tbody>
-        @*Loop to get data from database*@
+        Loop to get data from database
         @foreach(var obj in Model)
         {
             <tr>
@@ -63,16 +63,16 @@
                 </td>
 
                 <td width= "10%">
-                    @obj.NAZWISKO
+                    @obj.LAST_NAME
                 </td>
             
             
                 <td width= "10%">
-                    @obj.IMIE
+                    @obj.NAME
 
                 </td>
                 <td width= "20%">
-                    @obj.DATA_URODZENIA
+                    @obj.DATE_OF_BIRTH
                 </td>
             
             
@@ -81,12 +81,12 @@
 
                 </td>
                   <td width= "10%">
-                    @obj.TELEFON
+                    @obj.PHONE
 
                 </td>
                 <td  width= "10%" >
                     <div class = "w-75 btn-group" role = "group">
-                        <a asp-controller = "Uzytkownik" asp-action ="Edit" asp-route-id="@obj.ID" class = "btn btn-primary">
+                        <a asp-controller = "User" asp-action ="Edit" asp-route-id="@obj.ID" class = "btn btn-primary">
                             <i class="bi bi-pen"></i> Edit</a>
                     </div>
 
@@ -94,7 +94,7 @@
 
                 <td  width= "10%" >
                     <div class = "w-75 btn-group" role = "group">
-                        <a asp-controller = "Uzytkownik" asp-action ="Delete" asp-route-id="@obj.ID" class = "btn btn-danger">
+                        <a asp-controller = "User" asp-action ="Delete" asp-route-id="@obj.ID" class = "btn btn-danger">
                             <i class="bi bi-x-square"></i> Delete</a>
                     </div>
 
@@ -104,3 +104,4 @@
     </tbody>
 
 </table>
+*@

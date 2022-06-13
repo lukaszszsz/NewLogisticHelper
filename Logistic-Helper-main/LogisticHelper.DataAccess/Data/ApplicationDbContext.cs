@@ -1,5 +1,6 @@
 ﻿using LogisticHelper.Models;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LogisticHelper.DataAccess
 {
@@ -10,7 +11,10 @@ namespace LogisticHelper.DataAccess
 
         }
 
-        public DbSet<Uzytkownik> Uzytkownik { get; set; }
+        public DbSet<User> User { get; set; }
+
+
         public DbSet<Terc> Terc { get; set; }
     }
+
 }

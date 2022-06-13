@@ -3,9 +3,10 @@
 }
         <label>Wyszukaj Miejscowość</label>
            @* <input asp-for = "" class = "form-control"/>
-            <span asp-validation-for="NAZWISKO" class= "text-danger"></span>
+            <span asp-validation-for="LAST_NAME" class= "text-danger"></span>
             *@
-            <button type= "submit" asp-controller="Teryt" asp-action="Search" class = "btn btn-primary" style = "width:150px">Szukaj lokalizacji</button>
+
+            <a asp-controller="Teryt" asp-action="Search" class = "btn btn-primary" style = "width:150px">Szukaj lokalizacji</a>
 @*Show me voivodeships*@
 @*<table class="table table-bordered table-stripped" style= "width:100%;">*@
     @*<thead>

@@ -9,11 +9,14 @@ namespace LogisticHelper.Repository
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            Uzytkownik = new UzytkownikRepository(_db);
+            User = new UserRepository(_db);
+            Terc = new TercRepository(_db);
         }
 
-        public IUzytkownikRepository Uzytkownik
+        public IUserRepository User
         { get; private set;   }
+        public ITercRepository Terc
+        { get; private set; }
 
         public void Save()
         {

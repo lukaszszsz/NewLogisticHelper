@@ -10,7 +10,8 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.0-preview.4.22229.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0-preview.4.22229.2",
-          "Microsoft.EntityFrameworkCore.Tools": "7.0.0-preview.4.22229.2"
+          "Microsoft.EntityFrameworkCore.Tools": "7.0.0-preview.4.22229.2",
+          "jQuery.UI.Combined": "1.13.1"
         },
         "runtime": {
           "LogisticHelper.Models.dll": {}
@@ -56,6 +57,12 @@
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
           }
+        }
+      },
+      "jQuery/2.0.0": {},
+      "jQuery.UI.Combined/1.13.1": {
+        "dependencies": {
+          "jQuery": "2.0.0"
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
@@ -650,6 +657,20 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "jQuery/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-u3YiE0QnFnBExPkBPqWr2EVd8nh01iQlMWPRfa7b1fQ53YuMtHw+Y9oaJukHtEHaMpyL0PJzq69y3/5AxWogGA==",
+      "path": "jquery/2.0.0",
+      "hashPath": "jquery.2.0.0.nupkg.sha512"
+    },
+    "jQuery.UI.Combined/1.13.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z5olAfuIabCwgfihNOCVwshNHtST5wXIg/Bati9HjdhygUtvZ6xoalP2lN3i0KtTiTrNqAhgA0B3C8k/Rue/Qg==",
+      "path": "jquery.ui.combined/1.13.1",
+      "hashPath": "jquery.ui.combined.1.13.1.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
       "type": "package",
