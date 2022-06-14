@@ -25,6 +25,36 @@ namespace LogisticHelper.Controllers
             IEnumerable<Terc> objUserList = _unitOfWork.Terc.GetAll();
             return View(objUserList);
         }
+        public IActionResult Search()
+        {
+
+            IEnumerable<Terc> objUserList = _unitOfWork.Terc.GetAll();
+            return View(objUserList);
+        }
+        public JsonResult AutoComplete(string input)
+        {
+
+            //_unitOfWork.User.GetFirstOrDefault(u => u.ID == id);
+            IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
+
+            var search = (from Terc in objTercList
+                          where
+                           Terc.NAZWA.StartsWith(input)
+                          select new
+                          {
+                              label = Terc.NAZWA,
+                              val = Terc.NAZWA
+                          }).Take(5).ToList();
+            return Json(search);
+        }
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            ViewBag.Message = "Selected GMI Name: " + search;
+            return View();
+        }
+
+
 
         // GET: TercsController/Details/5
         public ActionResult Details(int id)
