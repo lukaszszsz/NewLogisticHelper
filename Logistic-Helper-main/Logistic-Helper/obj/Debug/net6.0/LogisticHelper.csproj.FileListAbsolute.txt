@@ -198,7 +198,6 @@ N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\Logistic-Helper\obj\Debu
 N:\Programowanie\Inzynierka\PI2023\Logistic-Helper-main\Logistic-Helper\obj\Debug\net6.0\LogisticHelper.genruntimeconfig.cache
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\appsettings.Development.json
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\appsettings.json
-N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\Connected Services\serviceteryt\ConnectedService.json
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\LogisticHelper.staticwebassets.runtime.json
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\LogisticHelper.exe
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\LogisticHelper.deps.json

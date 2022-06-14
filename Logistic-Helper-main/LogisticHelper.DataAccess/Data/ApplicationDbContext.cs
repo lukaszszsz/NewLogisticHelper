@@ -11,10 +11,10 @@ namespace LogisticHelper.DataAccess
 
         }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
-        public DbSet<Terc> Terc { get; set; }
+        public DbSet<Terc> Tercs { get; set; }
     }
 
 }

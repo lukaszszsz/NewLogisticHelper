@@ -12,7 +12,7 @@ namespace LogisticHelper.Controllers
     public class TerytController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private DbContext Context { get; }
+        
         public TerytController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -20,23 +20,25 @@ namespace LogisticHelper.Controllers
 
         }
         // GET: TerytController
+        /*  public IActionResult Index()
+          {
+              IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
+
+              //var cos =  client.PobierzListeMiejscowosciWGminieAsync( "śląskie", "gliwicki","gierałtowice",DateTime.Now).Result;
+              //LINQ To get correct data
+
+
+              return View(objTercList);
+
+
+
+          }*/
+
         public IActionResult Index()
         {
-            /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
 
-
-
-
-            IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
-
-            //var cos =  client.PobierzListeMiejscowosciWGminieAsync( "śląskie", "gliwicki","gierałtowice",DateTime.Now).Result;
-            //LINQ To get correct data
-
-
-            return View(objTercList);
-
-
-
+            IEnumerable<Terc> Terc = _unitOfWork.Terc.GetAll();
+            return View(Terc);
         }
 
         // GET: TerytController/Details/5
@@ -64,7 +66,7 @@ namespace LogisticHelper.Controllers
           IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
 
             var search =  (from Terc in objTercList
-                           where                         
+                           where
                             Terc.NAZWA.StartsWith(input)
                            select new
                            {

@@ -1,8 +1,11 @@
-﻿using LogisticHelper.Models;
-using LogisticHelper.Repository;
-using LogisticHelper.Repository.IRepository;
+﻿using LogisticHelper.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using LogisticHelper.DataAccess;
+using LogisticHelper.Models;
 
 namespace LogisticHelper.Controllers
 {
@@ -21,8 +24,8 @@ namespace LogisticHelper.Controllers
         public IActionResult Index()
         {
            
-            //IEnumerable<User> objUserList = _unitOfWork.User.GetAll();
-            return View();
+            IEnumerable<User> objUserList = _unitOfWork.User.GetAll();
+            return View(objUserList);
         }
         // GET: UserController/Create
         public ActionResult Create()
@@ -126,5 +129,6 @@ namespace LogisticHelper.Controllers
 
             return RedirectToAction("Index");
         }
+      
     }
 }

@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Terc";
+}
+
+<h1>Hej, łelkom na Tercu</h1>
+
+
+
+
+<div class = "container p-3">
+    <div class = "row pt-4">
+        <div class= "col-6">
+            <h2 class = "text-primary">Terc List</h2>
+
+        </div>
+        <div class= "col-6 text-end">
+            <a asp-controller="Terc" asp-action= "Create" class = "btn btn-primary"> Create New Terc <i class="bi bi-plus-circle"></i></a>
+
+        </div>
+    </div>
+    <br /><br/>
+</div>
+
+
+@*Table which shows Category inside*@
+
+<table class="table table-bordered table-stripped" style= "width:100%;">
+    <thead>
+        <tr>
+            <th>
+               ID
+            </th>
+            <th>
+                LAST_NAME
+            </th>
+               <th>
+               NAME
+            </th>
+            <th>
+                Data Urodzenia
+            </th>
+               <th>
+               Mail
+            </th>
+            <th>
+                PHONE
+            </th>
+            <th>
+                Edit
+            </th>
+              <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        Loop to get data from database
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width= "10%">
+                    @obj.WOJ
+                </td>
+
+                <td width= "10%">
+                    @obj.POW
+                </td>
+            
+            
+                <td width= "10%">
+                    @obj.GMI
+
+                </td>
+               
+          </tr>
+        }
+    </tbody>
+
+</table>

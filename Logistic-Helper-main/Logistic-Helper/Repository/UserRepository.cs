@@ -17,7 +17,11 @@ namespace LogisticHelper.Repository
 
         public void Update(User obj)
         {
-            _db.User.Update(obj);
+            _db.Users.Update(obj);
+        }
+        public void Save()
+        {
+            _db.SaveChanges();
         }
     }
 }

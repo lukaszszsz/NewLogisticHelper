@@ -17,7 +17,11 @@ namespace LogisticHelper.Repository
 
         public void Update(Terc obj)
         {
-            _db.Terc.Update(obj);
+            _db.Tercs.Update(obj);
+        }
+        public void Save()
+        {
+            _db.SaveChanges();
         }
     }
 }
