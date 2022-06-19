@@ -19,20 +19,10 @@ namespace LogisticHelper.Controllers
            
 
         }
-        // GET: TerytController
-        /*  public IActionResult Index()
-          {
-              IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
-
-              //var cos =  client.PobierzListeMiejscowosciWGminieAsync( "śląskie", "gliwicki","gierałtowice",DateTime.Now).Result;
-              //LINQ To get correct data
+      
 
 
-              return View(objTercList);
-
-
-
-          }*/
+          
 
         public IActionResult Index()
         {
@@ -57,21 +47,22 @@ namespace LogisticHelper.Controllers
 
 
         //AUTOCOMPLETE FUNCTION FOR SEARCH PURPOSES
-
+        //Function allows us to search data from table Terc, thanks to this,
+        //we can find Gmina, Powiat and Wojewodztwo, just by  typing in textbox
         [HttpPost]
         public JsonResult AutoComplete(string input)
        {
-
-            //_unitOfWork.User.GetFirstOrDefault(u => u.ID == id);
+            //create a list of all Terc elements
           IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
-
+            //scan them
             var search =  (from Terc in objTercList
                            where
                             Terc.NAZWA.StartsWith(input)
                            select new
                            {
                                label = Terc.NAZWA,
-                               val = Terc.NAZWA
+                               val = Terc.NAZWA,
+                               
                            }).Take(5).ToList();
             return Json(search);
         }
@@ -86,7 +77,7 @@ namespace LogisticHelper.Controllers
         // POST: TerytController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //Trzeba zrobić listę ze wszystkimi miastami :/
+        
        
 
         // GET: TerytController/Edit/5

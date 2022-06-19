@@ -29,21 +29,26 @@ namespace LogisticHelper.Controllers
         {
 
             IEnumerable<Terc> objUserList = _unitOfWork.Terc.GetAll();
+            
             return View(objUserList);
         }
+        //AUTOCOMPLETE FUNCTION FOR SEARCH PURPOSES
+        //Function allows us to search data from table Terc, thanks to this,
+        //we can find Gmina, Powiat and Wojewodztwo, just by  typing in textbox
+        [HttpPost]
         public JsonResult AutoComplete(string input)
         {
-
-            //_unitOfWork.User.GetFirstOrDefault(u => u.ID == id);
+            //create a list of all Terc elements
             IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
-
+            //scan them
             var search = (from Terc in objTercList
                           where
                            Terc.NAZWA.StartsWith(input)
                           select new
                           {
                               label = Terc.NAZWA,
-                              val = Terc.NAZWA
+                              val = Terc.STAN_NA,
+
                           }).Take(5).ToList();
             return Json(search);
         }
@@ -51,6 +56,20 @@ namespace LogisticHelper.Controllers
         public ActionResult Search(string search)
         {
             ViewBag.Message = "Selected GMI Name: " + search;
+            
+            ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
+            /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
+
+
+            client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
+            client.ClientCredentials.UserName.Password = "so6QT8ahG";
+            client.OpenAsync().Wait();
+
+            DateTime date = new DateTime(2020, 06, 06);
+
+            //Here we have XML compressed to ZIP, now figure out how to suck it to db
+            var dd = client.PobierzZmianyTercUrzedowyAsync(date,DateTime.Now);
+
             return View();
         }
 

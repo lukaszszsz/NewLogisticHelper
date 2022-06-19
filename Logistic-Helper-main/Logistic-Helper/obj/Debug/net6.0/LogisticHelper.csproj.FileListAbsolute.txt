@@ -300,3 +300,4 @@ N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\Mono.TextTemplating.dll
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\System.CodeDom.dll
+N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\Connected Services\ServiceReference1\ConnectedService.json
