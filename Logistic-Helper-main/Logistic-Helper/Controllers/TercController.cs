@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using LogisticHelper.DataAccess;
 using LogisticHelper.Models;
 using ServiceReference1;
+using System.IO.Compression;
+using System.Net;
 //using ServiceReference1;
 
 namespace LogisticHelper.Controllers
@@ -67,13 +69,23 @@ namespace LogisticHelper.Controllers
             client.OpenAsync().Wait();
 
             DateTime date = new DateTime(2020, 06, 06);
-           
+
             //Here we have XML compressed to ZIP, now figure out how to suck it to db
-            var dd = client.PobierzZmianyTercUrzedowyAsync(date,DateTime.Now);
-            PlikZmiany ss = dd.Result;
-            string fileName = ss.nazwa_pliku;
+            //FileChange is a variable in which is file, it doesnt exist phyisically on disc, how to unzip it?
+            var UpdateFile = client.PobierzZmianyTercUrzedowyAsync(date, DateTime.Now);
+            PlikZmiany fileChange = UpdateFile.Result;
+            string fileName = fileChange.nazwa_pliku;
+            string zipContent = fileChange.plik_zawartosc;
+            string scenario = fileChange.opis;
+            var webClient  = new WebClient();
+            webClient.Credentials = CredentialCache.DefaultCredentials;
+            webClient.DownloadFile("https://uslugaterytws1.stat.gov.pl/wsdl/terytws1.wsdl",fileName);
+            FileStream fs = new FileStream(fileName, FileMode.Open);
+            ZipArchive zipArchive = new ZipArchive(fs);
+               /* string destination = @"N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\File";
+              zipArchive.ExtractToDirectory(destination);*/
+            ViewBag.Message = "Selected SS Name: " + fileName;
             ViewBag.Message = "Selected GMI Name: " + search;
-            ViewBag.Message = "Selected SS Name: " + ss;
 
 
 
