@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.OData.Edm" Version="7.11.0" />
     <PackageReference Include="mongocsharpdriver" Version="2.15.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.15.1" />
+    <PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.*" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.*" />

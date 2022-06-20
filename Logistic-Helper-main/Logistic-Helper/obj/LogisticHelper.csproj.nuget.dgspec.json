@@ -73,6 +73,10 @@
               "target": "Package",
               "version": "[2.15.1, )"
             },
+            "System.IO.Compression.ZipFile": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "System.ServiceModel.Duplex": {
               "target": "Package",
               "version": "[4.8.*, )"
@@ -178,6 +182,10 @@
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
             },
+            "System.IO.Compression.ZipFile": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "jQuery.UI.Combined": {
               "target": "Package",
               "version": "[1.13.1, )"
@@ -255,6 +263,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "System.IO.Compression.ZipFile": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             },
             "jQuery.UI.Combined": {
               "target": "Package",

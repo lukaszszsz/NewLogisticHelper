@@ -2078,19 +2078,19 @@ namespace ServiceReference1
             }
         }
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlikZmiany", Namespace="http://schemas.datacontract.org/2004/07/TerytUslugaWs1")]
-    public partial class PlikZmiany : object
+    [System.Runtime.Serialization.DataContractAttribute(Name = "PlikZmiany", Namespace = "http://schemas.datacontract.org/2004/07/TerytUslugaWs1")]
+    public partial class PlikZmiany : object, IPlikZmiany
     {
-        
+
         private string nazwa_plikuField;
-        
+
         private string opisField;
-        
+
         private string plik_zawartoscField;
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string nazwa_pliku
         {
@@ -2103,7 +2103,7 @@ namespace ServiceReference1
                 this.nazwa_plikuField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string opis
         {
@@ -2116,7 +2116,7 @@ namespace ServiceReference1
                 this.opisField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string plik_zawartosc
         {
@@ -2130,7 +2130,7 @@ namespace ServiceReference1
             }
         }
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GeoTeryt", Namespace="http://schemas.datacontract.org/2004/07/TerytUslugaWs1")]

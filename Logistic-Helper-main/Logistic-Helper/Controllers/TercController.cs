@@ -6,6 +6,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using LogisticHelper.DataAccess;
 using LogisticHelper.Models;
+using ServiceReference1;
+//using ServiceReference1;
 
 namespace LogisticHelper.Controllers
 {
@@ -55,7 +57,6 @@ namespace LogisticHelper.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-            ViewBag.Message = "Selected GMI Name: " + search;
             
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
             /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
@@ -66,9 +67,16 @@ namespace LogisticHelper.Controllers
             client.OpenAsync().Wait();
 
             DateTime date = new DateTime(2020, 06, 06);
-
+           
             //Here we have XML compressed to ZIP, now figure out how to suck it to db
             var dd = client.PobierzZmianyTercUrzedowyAsync(date,DateTime.Now);
+            PlikZmiany ss = dd.Result;
+            string fileName = ss.nazwa_pliku;
+            ViewBag.Message = "Selected GMI Name: " + search;
+            ViewBag.Message = "Selected SS Name: " + ss;
+
+
+
 
             return View();
         }
