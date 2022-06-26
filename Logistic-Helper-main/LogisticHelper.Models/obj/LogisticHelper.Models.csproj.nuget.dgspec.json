@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "ChilkatDnCore": {
+              "target": "Package",
+              "version": "[9.5.0.90, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
