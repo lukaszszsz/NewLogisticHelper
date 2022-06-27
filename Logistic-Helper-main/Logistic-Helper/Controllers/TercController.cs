@@ -79,24 +79,19 @@ namespace LogisticHelper.Controllers
             string zipContent = fileChange.plik_zawartosc;
             string scenario = fileChange.opis;
 
-
+            //working decoding from base64 to zip
             Chilkat.BinData zipData = new Chilkat.BinData();
             bool success = zipData.AppendEncoded(zipContent, "base64");
             success = zipData.WriteFile("N:/Programowanie/Inzynierka/PI2023/NewLogistic/NewLogisticHelper/Logistic-Helper-main/Logistic-Helper/File/out.zip");
           
-            //downloading file
-
-            /*  var webClient = new WebClient();
-              webClient.Credentials = CredentialCache.DefaultCredentials;
-              webClient.DownloadFile("https://uslugaterytws1.stat.gov.pl/wsdl/terytws1.wsdl", fileName);
-             */
+            
 
 
 
-            FileStream fs = new FileStream(fileName, FileMode.Open);
+            FileStream fs = new FileStream("./File/out.zip", FileMode.Open);
             ZipArchive zipArchive = new ZipArchive(fs);
-               /* string destination = @"N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\File";
-              zipArchive.ExtractToDirectory(destination);*/
+               string destination = "N:/Programowanie/Inzynierka/PI2023/NewLogistic/NewLogisticHelper/Logistic-Helper-main/Logistic-Helper/File/";
+              zipArchive.ExtractToDirectory(destination);
             ViewBag.Message = "Selected SS Name: " + zipContent;
           //  ViewBag.Message = "Selected GMI Name: " + search;
 
