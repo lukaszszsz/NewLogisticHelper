@@ -102,25 +102,58 @@ namespace LogisticHelper.Controllers
            XmlDocument reader = new XmlDocument();
             reader.Load("/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml"); ;
             var line = reader.ToString();
+
+            //Odczytaj "zmiana".
+            // Sprawdź jaki rodzaj korekty
+            //JEŚLI "M"
+            //Stwórz słownik, <string, string>
+            //var zmiana= new Dictionary<string, string>(){
+            /*    { "WOJ", "WojPrzed, WojPo"},
+                  { "POW", "PowPrzed , PowPo "},
+                  { "GMI", "GmiPrzed , GmiPo"}
+                  { "RODZ", "RodzPrzed , RodzPo "},
+                  { "NAZWA", "NazwaPrzed , NazwaPo "},
+                  { "NAZWA_DOD", "NazwaDodatkowaPrzed  , NazwaDodatkowaPo"}
+                  { "STAN_NA", "StanPrzed , StanPo"}
+
+            -------------------------
+             Policz ilość value
+            availableStats.Values.Sum(x => x.Count)
+
+            https://www.tutorialace.com/csharp-dictionary-foreach/
+            ----------------------
+            JEŚLI count NotNull>1, weź 2 wartość
+            https://codesamplez.com/database/insert-update-delete-linq-to-sql
+          };*/
+
+
             // XmlReader reader = XmlReader(fs);
-           
-                /*   if(reader.NodeType == XmlNodeType.Element && reader.Name == "TypKorekty")
-                   {
-                       string val = reader.Value;
-                   }*/
-                switch (line)
+
+            /*   if(reader.NodeType == XmlNodeType.Element && reader.Name == "TypKorekty")
+               {
+                   string val = reader.Value;
+               }*/
+            switch (line)
                 {
                     case "M":
                         {
-                            for (int i = 0; i < reader.ChildNodes.Count; i++)
+                            var change = new Dictionary<string, string>()
                             {
-                                if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
+
+                            }
+
+                            /*for (int i = 0; i < reader.ChildNodes.Count; i++)
+                            {
+                               
+
+                                *//*if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
                                     continue;
                                 else
                                 {
                                     string valueToChange = reader.ChildNodes[i].InnerText;
-                                }
-                            }
+                                    
+                                }*//*
+                            }*/
                         }
                         break;
                     case "Location":
