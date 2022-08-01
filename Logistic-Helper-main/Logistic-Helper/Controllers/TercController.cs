@@ -10,6 +10,8 @@ using ServiceReference1;
 using System.IO.Compression;
 using System.Net;
 using System.Diagnostics;
+using System.Xml.Serialization;
+using System.Xml;
 //using ServiceReference1;
 
 namespace LogisticHelper.Controllers
@@ -68,7 +70,7 @@ namespace LogisticHelper.Controllers
             client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
             client.ClientCredentials.UserName.Password = "so6QT8ahG";
             client.OpenAsync().Wait();
-
+            
             DateTime date = new DateTime(2020, 06, 06);
 
             //Here we have XML compressed to ZIP, now figure out how to suck it to db
@@ -82,7 +84,7 @@ namespace LogisticHelper.Controllers
             //working decoding from base64 to zip
             Chilkat.BinData zipData = new Chilkat.BinData();
             bool success = zipData.AppendEncoded(zipContent, "base64");
-            success = zipData.WriteFile("N:/Programowanie/Inzynierka/PI2023/NewLogistic/NewLogisticHelper/Logistic-Helper-main/Logistic-Helper/File/out.zip");
+            success = zipData.WriteFile(Directory.GetCurrentDirectory() + @"/File/out.zip");
           
             
 
@@ -90,18 +92,46 @@ namespace LogisticHelper.Controllers
 
             FileStream fs = new FileStream("./File/out.zip", FileMode.Open);
             ZipArchive zipArchive = new ZipArchive(fs);
-               string destination = "N:/Programowanie/Inzynierka/PI2023/NewLogistic/NewLogisticHelper/Logistic-Helper-main/Logistic-Helper/File/";
+               string destination = Directory.GetCurrentDirectory()+@"/File/";
               zipArchive.ExtractToDirectory(destination);
             ViewBag.Message = "Selected SS Name: " + zipContent;
-          //  ViewBag.Message = "Selected GMI Name: " + search;
+            //  ViewBag.Message = "Selected GMI Name: " + search;
 
-
-
-
+            //Above works, need smth to read xml
+            //XmlReader reader = XmlReader.Create(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml");
+           XmlDocument reader = new XmlDocument();
+            reader.Load("/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml"); ;
+            var line = reader.ToString();
+            // XmlReader reader = XmlReader(fs);
+           
+                /*   if(reader.NodeType == XmlNodeType.Element && reader.Name == "TypKorekty")
+                   {
+                       string val = reader.Value;
+                   }*/
+                switch (line)
+                {
+                    case "M":
+                        {
+                            for (int i = 0; i < reader.ChildNodes.Count; i++)
+                            {
+                                if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
+                                    continue;
+                                else
+                                {
+                                    string valueToChange = reader.ChildNodes[i].InnerText;
+                                }
+                            }
+                        }
+                        break;
+                    case "Location":
+                        Console.WriteLine("Your Location is : " + reader.ReadString());
+                        break;
+                }
+            
             return View();
         }
 
-
+       
 
         // GET: TercsController/Details/5
         public ActionResult Details(int id)
