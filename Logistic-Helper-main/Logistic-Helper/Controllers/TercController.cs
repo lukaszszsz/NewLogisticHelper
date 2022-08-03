@@ -12,6 +12,7 @@ using System.Net;
 using System.Diagnostics;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Xml.Linq;
 //using ServiceReference1;
 
 namespace LogisticHelper.Controllers
@@ -65,7 +66,7 @@ namespace LogisticHelper.Controllers
             
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
             /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
-
+            IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
 
             client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
             client.ClientCredentials.UserName.Password = "so6QT8ahG";
@@ -98,10 +99,11 @@ namespace LogisticHelper.Controllers
             //  ViewBag.Message = "Selected GMI Name: " + search;
 
             //Above works, need smth to read xml
-            //XmlReader reader = XmlReader.Create(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml");
-           XmlDocument reader = new XmlDocument();
-            reader.Load("/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml"); ;
-            var line = reader.ToString();
+            XmlReader reader = XmlReader.Create(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml");
+            //XDocument reader = XDocument.Load(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml");
+            /*XmlDocument reader = new XmlDocument();
+            reader.Read(Directory.GetCurrentDirectory() + "/File/TERC_Urzedowy_zmiany_2020-06-06_2022-08-02.xml"); ;
+            var line = reader.ToString();*/
 
             //Odczytaj "zmiana".
             // Sprawdź jaki rodzaj korekty
@@ -124,42 +126,99 @@ namespace LogisticHelper.Controllers
             ----------------------
             JEŚLI count NotNull>1, weź 2 wartość
             https://codesamplez.com/database/insert-update-delete-linq-to-sql
+            
+            Pętla przez słownik, weź wartość, jeśli [1] == null, weź [0]
+
           };*/
 
+            // ----------------------XDocument(LINQ-----------------------------*/
+            /*  var q = from zmiany in reader.Descendants("zmiana")
+                      select new
+                      {
+                          qTypZmiany = (string)zmiany.Element("TypKorekty"),
+                         *//* qWojPrzed = (string?)zmiany.Element("WojPrzed"),
+                          qPowPrzed = (string?)zmiany.Element("PowPrzed"),
+                          qGmiPrzed = (string?)zmiany.Element("GmiPrzed"),
+                         qRodzPrzed = (string?)zmiany.Element("RodzPrzed"),
+                          qNazwaPrzed = (string?)zmiany.Element("NazwaPrzed"),
+                          qNazwaDodatkowaPrzed = (string?)zmiany.Element("NazwaDodatkowaPrzed"),*//*
 
-            // XmlReader reader = XmlReader(fs);
+                          qWojPo = (string)zmiany.Element("WojPo ") ?? (string)zmiany.Element("WojPrzed"),
+                          qPowPo = (string)zmiany.Element("PowPo ") ?? (string)zmiany.Element("PowPrzed"),
+                          qGmiPo = (string)zmiany.Element("GmiPo ") ?? (string)zmiany.Element("GmiPrzed"),
+                          qRodzPo = (string)zmiany.Element("RodzPo ") ?? (string)zmiany.Element("RodzPrzed"),
+                          qNazwaPo = (string)zmiany.Element("NazwaPo") ?? (string)zmiany.Element("NazwaPrzed"),
+                          qNazwaDodatkowaPo = (string?)zmiany.Element("NazwaDodatkowaPo") ?? (string)zmiany.Element("NazwaDodatkowaPrzed"),
 
-            /*   if(reader.NodeType == XmlNodeType.Element && reader.Name == "TypKorekty")
-               {
-                   string val = reader.Value;
-               }*/
-            switch (line)
+                      };
+          var find = context.Ter*/
+            var line = reader.ToString();
+
+            while (reader.Read())
+            {
+                switch (linia)
                 {
                     case "M":
                         {
-                            var change = new Dictionary<string, string>()
+                            var zmiana = new Dictionary<string, string>();
+                            int i = 1;
+                            foreach (var obj in objTercList)
                             {
+                                zmiana.Add(obj.ToString(), reader.ChildNodes[i].ToString());
+                                zmiana.Add(obj.ToString(), reader.ChildNodes[i + 7].ToString());
+                                i++;
+                            };
 
-                            }
 
-                            /*for (int i = 0; i < reader.ChildNodes.Count; i++)
-                            {
-                               
-
-                                *//*if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
-                                    continue;
-                                else
-                                {
-                                    string valueToChange = reader.ChildNodes[i].InnerText;
-                                    
-                                }*//*
-                            }*/
+                            /*{ "POW", "reader.ChildNodes[2].ToString() , reader.ChildNodes[9].ToString()"},
+                            { "GMI", "reader.ChildNodes[3].ToString() , reader.ChildNodes[10].ToString()"},
+                            { "RODZ", "reader.ChildNodes[4].ToString() , reader.ChildNodes[11].ToString() "},
+                            { "NAZWA", reader.ChildNodes[5].ToString() , reader.ChildNodes[12].ToString() },
+                            { "NAZWA_DOD", "reader.ChildNodes[6].ToString()  , NazwaDodatkowaPo"},
+                            { "STAN_NA", "StanPrzed , StanPo"}*/
+                            break;
                         }
-                        break;
-                    case "Location":
-                        Console.WriteLine("Your Location is : " + reader.ReadString());
-                        break;
                 }
+
+                   
+                }
+            
+
+                                
+
+                                // XmlReader reader = XmlReader(fs);
+                    /*
+                                   if(reader.NodeType == XmlNodeType.Element && reader.Name == "zmiana")
+                                   {
+                                       string val = reader.Value;
+                                   }*/
+                                /*   switch (line)
+                                       {
+                                           case "M":
+                                               {
+                                                   var change = new Dictionary<string, string>()
+                                                   {
+
+                                                   }*/
+
+                                /*for (int i = 0; i < reader.ChildNodes.Count; i++)
+                                {
+
+
+                                    *//*if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
+                                        continue;
+                                    else
+                                    {
+                                        string valueToChange = reader.ChildNodes[i].InnerText;
+
+                                    }*//*
+                                }*/
+                            
+                        
+                    /*case "Location":
+                        Console.WriteLine("Your Location is : " + reader.ReadString());
+                        break;*/
+                
             
             return View();
         }
