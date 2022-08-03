@@ -156,17 +156,36 @@ namespace LogisticHelper.Controllers
 
             while (reader.Read())
             {
-                switch (linia)
+                reader.ReadToFollowing("zmiana");
+                
+                XmlReader inside = reader.ReadSubtree();
+                inside.ReadToDescendant("TypKorekty");
+                var updateType = inside.Name;
+                switch(updateType)
                 {
                     case "M":
                         {
-                            var zmiana = new Dictionary<string, string>();
+                            inside.ReadToDescendant("WojPo");
+                            if (inside.Name == null)
+                                continue;
+                            else
+                            {
+                                string change = inside.NodeType.ToString();
+                                change = change.Substring(0, change.Length - 2);
+                                
+                                string newValue = inside.Name;
+                            }
+                            break;
+                        }
+                }
+                   
+                            /*var zmiana = new Dictionary<string, string>();
                             int i = 1;
                             foreach (var obj in objTercList)
                             {
                                 zmiana.Add(obj.ToString(), reader.ChildNodes[i].ToString());
                                 zmiana.Add(obj.ToString(), reader.ChildNodes[i + 7].ToString());
-                                i++;
+                                i++;*/
                             };
 
 
