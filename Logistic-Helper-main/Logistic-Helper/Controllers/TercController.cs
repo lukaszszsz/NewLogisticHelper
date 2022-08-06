@@ -1,18 +1,11 @@
-﻿using LogisticHelper.Repository.IRepository;
-using Microsoft.AspNetCore.Http;
+﻿using LogisticHelper.Models;
+using LogisticHelper.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using LogisticHelper.DataAccess;
-using LogisticHelper.Models;
 using ServiceReference1;
 using System.IO.Compression;
-using System.Net;
-using System.Diagnostics;
-using System.Xml.Serialization;
 using System.Xml;
-using System.Xml.Linq;
+//using System.Linq.Dynamic;
+using System.Linq;
 //using ServiceReference1;
 
 namespace LogisticHelper.Controllers
@@ -37,7 +30,7 @@ namespace LogisticHelper.Controllers
         {
 
             IEnumerable<Terc> objUserList = _unitOfWork.Terc.GetAll();
-            
+
             return View(objUserList);
         }
         //AUTOCOMPLETE FUNCTION FOR SEARCH PURPOSES
@@ -63,7 +56,7 @@ namespace LogisticHelper.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-            
+
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
             /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
             IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
@@ -71,14 +64,14 @@ namespace LogisticHelper.Controllers
             client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
             client.ClientCredentials.UserName.Password = "so6QT8ahG";
             client.OpenAsync().Wait();
-            
+
             DateTime date = new DateTime(2020, 06, 06);
 
             //Here we have XML compressed to ZIP, now figure out how to suck it to db
             //FileChange is a variable in which is file, it doesnt exist phyisically on disc, how to unzip it?
             var UpdateFile = client.PobierzZmianyTercUrzedowyAsync(date, DateTime.Now);
             PlikZmiany fileChange = UpdateFile.Result;
-            string fileName = fileChange.nazwa_pliku  ;
+            string fileName = fileChange.nazwa_pliku;
             string zipContent = fileChange.plik_zawartosc;
             string scenario = fileChange.opis;
 
@@ -86,20 +79,20 @@ namespace LogisticHelper.Controllers
             Chilkat.BinData zipData = new Chilkat.BinData();
             bool success = zipData.AppendEncoded(zipContent, "base64");
             success = zipData.WriteFile(Directory.GetCurrentDirectory() + @"/File/out.zip");
-          
-            
+
+
 
 
 
             FileStream fs = new FileStream("./File/out.zip", FileMode.Open);
             ZipArchive zipArchive = new ZipArchive(fs);
-               string destination = Directory.GetCurrentDirectory()+@"/File/";
-              zipArchive.ExtractToDirectory(destination);
+            string destination = Directory.GetCurrentDirectory() + @"/File/";
+            zipArchive.ExtractToDirectory(destination);
             ViewBag.Message = "Selected SS Name: " + zipContent;
             //  ViewBag.Message = "Selected GMI Name: " + search;
 
             //Above works, need smth to read xml
-            XmlReader reader = XmlReader.Create(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml");
+            XmlReader reader = XmlReader.Create(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-08-02.xml");
             //XDocument reader = XDocument.Load(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml");
             /*XmlDocument reader = new XmlDocument();
             reader.Read(Directory.GetCurrentDirectory() + "/File/TERC_Urzedowy_zmiany_2020-06-06_2022-08-02.xml"); ;
@@ -156,93 +149,137 @@ namespace LogisticHelper.Controllers
 
             while (reader.Read())
             {
-                reader.ReadToFollowing("zmiana");
                 
-                XmlReader inside = reader.ReadSubtree();
-                inside.ReadToDescendant("TypKorekty");
-                var updateType = inside.Name;
-                switch(updateType)
+
+               
+
+                var updateType = reader.Value;
+                IEnumerable<Terc> tercs = new List<Terc>();
+                switch (updateType)
                 {
                     case "M":
                         {
-                            inside.ReadToDescendant("WojPo");
-                            if (inside.Name == null)
-                                continue;
+                            string[] keys = new string[6];
+                            //reader.ReadToDescendant("WojPrzed");
+                            for (int i = 0; i < 6; i++)
+                            {
+                                keys[i] = reader.Name;
+                            }
+                            //reader.ReadToDescendant("WojPo");
+
+                            if (reader.Name == null)
+                                reader.Skip;
+                                
                             else
                             {
-                                string change = inside.NodeType.ToString();
+                                //Name of node
+                                string change = reader.NodeType.ToString();
                                 change = change.Substring(0, change.Length - 2);
+
+                                //Value of node
+                                string newValue = reader.Name;
+
+                                //How to do this?
+                                //var conn = new SqlConnection();
+                                /*ar cmd = new SqlCommand(, );
+                                cmd.ExecuteNonQuery();
+                                SqlCommand cmd = new SqlCommand("UPDATE Terc SET {0} = {1} WHERE WOJ = ",DefaultConncection change, newValue, );
+                            */
+                                Terc result = (from p in tercs
+                                               where p.WOJ.Equals(keys[0]) &&
+                                               p.POW.Equals(keys[1]) &&
+                                               p.GMI.Equals(keys[2]) &&
+                                               p.RODZ.Equals(keys[3]) &&
+                                               p.NAZWA.Equals(keys[4]) &&
+                                               p.NAZWA_DOD.Equals(keys[5])
+                                               select p).SingleOrDefault();
+                                /*if (result != null)
+                                {
+                                    //Update Terc Set change = newValue Where result isNotNull
+                                    //result.Equals(change).Update(newValue);
+                                        
+                                   
+                                }*/
+
+
                                 
-                                string newValue = inside.Name;
                             }
                             break;
                         }
-                }
-                   
-                            /*var zmiana = new Dictionary<string, string>();
-                            int i = 1;
-                            foreach (var obj in objTercList)
-                            {
-                                zmiana.Add(obj.ToString(), reader.ChildNodes[i].ToString());
-                                zmiana.Add(obj.ToString(), reader.ChildNodes[i + 7].ToString());
-                                i++;*/
-                            };
-
-
-                            /*{ "POW", "reader.ChildNodes[2].ToString() , reader.ChildNodes[9].ToString()"},
-                            { "GMI", "reader.ChildNodes[3].ToString() , reader.ChildNodes[10].ToString()"},
-                            { "RODZ", "reader.ChildNodes[4].ToString() , reader.ChildNodes[11].ToString() "},
-                            { "NAZWA", reader.ChildNodes[5].ToString() , reader.ChildNodes[12].ToString() },
-                            { "NAZWA_DOD", "reader.ChildNodes[6].ToString()  , NazwaDodatkowaPo"},
-                            { "STAN_NA", "StanPrzed , StanPo"}*/
+                    default:
                             break;
-                        }
-                }
-
-                   
-                }
-            
-
-                                
-
-                                // XmlReader reader = XmlReader(fs);
-                    /*
-                                   if(reader.NodeType == XmlNodeType.Element && reader.Name == "zmiana")
-                                   {
-                                       string val = reader.Value;
-                                   }*/
-                                /*   switch (line)
-                                       {
-                                           case "M":
-                                               {
-                                                   var change = new Dictionary<string, string>()
-                                                   {
-
-                                                   }*/
-
-                                /*for (int i = 0; i < reader.ChildNodes.Count; i++)
-                                {
-
-
-                                    *//*if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
-                                        continue;
-                                    else
-                                    {
-                                        string valueToChange = reader.ChildNodes[i].InnerText;
-
-                                    }*//*
-                                }*/
                             
                         
-                    /*case "Location":
-                        Console.WriteLine("Your Location is : " + reader.ReadString());
-                        break;*/
-                
-            
-            return View();
-        }
 
-       
+                } //Switch
+
+            }//While
+            return View();
+        } //Search
+
+
+        /*var zmiana = new Dictionary<string, string>();
+        int i = 1;
+        foreach (var obj in objTercList)
+        {
+            zmiana.Add(obj.ToString(), reader.ChildNodes[i].ToString());
+            zmiana.Add(obj.ToString(), reader.ChildNodes[i + 7].ToString());
+            i++;*/
+
+
+        /*{ "POW", "reader.ChildNodes[2].ToString() , reader.ChildNodes[9].ToString()"},
+        { "GMI", "reader.ChildNodes[3].ToString() , reader.ChildNodes[10].ToString()"},
+        { "RODZ", "reader.ChildNodes[4].ToString() , reader.ChildNodes[11].ToString() "},
+        { "NAZWA", reader.ChildNodes[5].ToString() , reader.ChildNodes[12].ToString() },
+        { "NAZWA_DOD", "reader.ChildNodes[6].ToString()  , NazwaDodatkowaPo"},
+        { "STAN_NA", "StanPrzed , StanPo"}*/
+
+
+
+
+
+
+
+
+
+        // XmlReader reader = XmlReader(fs);
+        /*
+                       if(reader.NodeType == XmlNodeType.Element && reader.Name == "zmiana")
+                       {
+                           string val = reader.Value;
+                       }*/
+        /*   switch (line)
+               {
+                   case "M":
+                       {
+                           var change = new Dictionary<string, string>()
+                           {
+
+                           }*/
+
+        /*for (int i = 0; i < reader.ChildNodes.Count; i++)
+        {
+
+
+            *//*if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
+                continue;
+            else
+            {
+                string valueToChange = reader.ChildNodes[i].InnerText;
+
+            }*//*
+        }*/
+
+
+        /*case "Location":
+            Console.WriteLine("Your Location is : " + reader.ReadString());
+            break;*/
+
+
+
+
+
+
 
         // GET: TercsController/Details/5
         public ActionResult Details(int id)
