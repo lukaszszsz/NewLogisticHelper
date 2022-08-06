@@ -54,7 +54,7 @@ namespace LogisticHelper.Controllers
             return Json(search);
         }
         [HttpPost]
-        public ActionResult Search(string search)
+        public object Search(string search)
         {
 
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
@@ -153,56 +153,62 @@ namespace LogisticHelper.Controllers
 
                
 
-                var updateType = reader.Value;
+                string updateType = reader.Value;
                 IEnumerable<Terc> tercs = new List<Terc>();
                 switch (updateType)
                 {
                     case "M":
                         {
+                            //we need subtree
                             string[] keys = new string[6];
-                            //reader.ReadToDescendant("WojPrzed");
-                            for (int i = 0; i < 6; i++)
+                            int i = 0;
+                            while (reader.Name != "zmiana")
                             {
-                                keys[i] = reader.Name;
-                            }
-                            //reader.ReadToDescendant("WojPo");
 
-                            if (reader.Name == null)
-                                reader.Skip;
+
+                                //reader.ReadToDescendant("WojPrzed");
+                                if (reader.Value == null)
+                                   reader.Skip();
+                             
+                            
                                 
-                            else
-                            {
-                                //Name of node
-                                string change = reader.NodeType.ToString();
-                                change = change.Substring(0, change.Length - 2);
+                                
 
-                                //Value of node
-                                string newValue = reader.Name;
-
-                                //How to do this?
-                                //var conn = new SqlConnection();
-                                /*ar cmd = new SqlCommand(, );
-                                cmd.ExecuteNonQuery();
-                                SqlCommand cmd = new SqlCommand("UPDATE Terc SET {0} = {1} WHERE WOJ = ",DefaultConncection change, newValue, );
-                            */
-                                Terc result = (from p in tercs
-                                               where p.WOJ.Equals(keys[0]) &&
-                                               p.POW.Equals(keys[1]) &&
-                                               p.GMI.Equals(keys[2]) &&
-                                               p.RODZ.Equals(keys[3]) &&
-                                               p.NAZWA.Equals(keys[4]) &&
-                                               p.NAZWA_DOD.Equals(keys[5])
-                                               select p).SingleOrDefault();
-                                /*if (result != null)
+                                else
                                 {
-                                    //Update Terc Set change = newValue Where result isNotNull
-                                    //result.Equals(change).Update(newValue);
-                                        
-                                   
-                                }*/
+                                    keys[i++] = reader.Value;
+                                    //Name of node
+                                    string change = reader.NodeType.ToString();
+                                    change = change.Substring(0, change.Length - 2);
+
+                                    //Value of node
+                                    string newValue = reader.Name;
+                                    reader.Skip();
+
+                                    //How to do this?
+                                    //var conn = new SqlConnection();
+                                    /*ar cmd = new SqlCommand(, );
+                                    cmd.ExecuteNonQuery();
+                                    SqlCommand cmd = new SqlCommand("UPDATE Terc SET {0} = {1} WHERE WOJ = ",DefaultConncection change, newValue, );
+                                */
+                                    Terc result = (from p in tercs
+                                                   where p.WOJ.Equals(keys[0]) &&
+                                                   p.POW.Equals(keys[1]) &&
+                                                   p.GMI.Equals(keys[2]) &&
+                                                   p.RODZ.Equals(keys[3]) &&
+                                                   p.NAZWA.Equals(keys[4]) &&
+                                                   p.NAZWA_DOD.Equals(keys[5])
+                                                   select p).SingleOrDefault();
+                                    /*if (result != null)
+                                    {
+                                        //Update Terc Set change = newValue Where result isNotNull
+                                        //result.Equals(change).Update(newValue);
 
 
-                                
+                                    }*/
+
+
+                                }
                             }
                             break;
                         }
