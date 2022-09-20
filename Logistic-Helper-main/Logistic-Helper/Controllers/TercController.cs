@@ -26,6 +26,9 @@ namespace LogisticHelper.Controllers
             IEnumerable<Terc> objUserList = _unitOfWork.Terc.GetAll();
             return View(objUserList);
         }
+
+
+     
         public IActionResult Search()
         {
 
@@ -53,6 +56,23 @@ namespace LogisticHelper.Controllers
                           }).Take(5).ToList();
             return Json(search);
         }
+
+        //Function which allows for checking value of nodes
+      
+        string handleNull(string xAfter, string xBefore)
+        {
+            if (xAfter == "")
+                xAfter = xBefore;
+            return xAfter;
+
+        }
+        string nullBefore(string xBefore)
+        {
+            if (xBefore == "")
+               xBefore = "0";
+            return xBefore;
+
+        }
         [HttpPost]
         public object Search(string search)
         {
@@ -78,7 +98,7 @@ namespace LogisticHelper.Controllers
             //working decoding from base64 to zip
             Chilkat.BinData zipData = new Chilkat.BinData();
             bool success = zipData.AppendEncoded(zipContent, "base64");
-            success = zipData.WriteFile(Directory.GetCurrentDirectory() + @"/File/out.zip");
+            success = zipData.WriteFile(Directory.GetCurrentDirectory() + @"/File/out.zip");s
 
 
 
@@ -92,199 +112,149 @@ namespace LogisticHelper.Controllers
             //  ViewBag.Message = "Selected GMI Name: " + search;
 
             //Above works, need smth to read xml
-            XmlReader reader = XmlReader.Create(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-08-02.xml");
-            //XDocument reader = XDocument.Load(Directory.GetCurrentDirectory() + @"/File/TERC_Urzedowy_zmiany_2020-06-06_2022-07-31.xml");
-            /*XmlDocument reader = new XmlDocument();
-            reader.Read(Directory.GetCurrentDirectory() + "/File/TERC_Urzedowy_zmiany_2020-06-06_2022-08-02.xml"); ;
-            var line = reader.ToString();*/
+           
+           
+            XmlDocument doc = new XmlDocument();
 
-            //Odczytaj "zmiana".
-            // Sprawdź jaki rodzaj korekty
-            //JEŚLI "M"
-            //Stwórz słownik, <string, string>
-            //var zmiana= new Dictionary<string, string>(){
-            /*    { "WOJ", "WojPrzed, WojPo"},
-                  { "POW", "PowPrzed , PowPo "},
-                  { "GMI", "GmiPrzed , GmiPo"}
-                  { "RODZ", "RodzPrzed , RodzPo "},
-                  { "NAZWA", "NazwaPrzed , NazwaPo "},
-                  { "NAZWA_DOD", "NazwaDodatkowaPrzed  , NazwaDodatkowaPo"}
-                  { "STAN_NA", "StanPrzed , StanPo"}
-
-            -------------------------
-             Policz ilość value
-            availableStats.Values.Sum(x => x.Count)
-
-            https://www.tutorialace.com/csharp-dictionary-foreach/
-            ----------------------
-            JEŚLI count NotNull>1, weź 2 wartość
-            https://codesamplez.com/database/insert-update-delete-linq-to-sql
-            
-            Pętla przez słownik, weź wartość, jeśli [1] == null, weź [0]
-
-          };*/
-
-            // ----------------------XDocument(LINQ-----------------------------*/
-            /*  var q = from zmiany in reader.Descendants("zmiana")
-                      select new
-                      {
-                          qTypZmiany = (string)zmiany.Element("TypKorekty"),
-                         *//* qWojPrzed = (string?)zmiany.Element("WojPrzed"),
-                          qPowPrzed = (string?)zmiany.Element("PowPrzed"),
-                          qGmiPrzed = (string?)zmiany.Element("GmiPrzed"),
-                         qRodzPrzed = (string?)zmiany.Element("RodzPrzed"),
-                          qNazwaPrzed = (string?)zmiany.Element("NazwaPrzed"),
-                          qNazwaDodatkowaPrzed = (string?)zmiany.Element("NazwaDodatkowaPrzed"),*//*
-
-                          qWojPo = (string)zmiany.Element("WojPo ") ?? (string)zmiany.Element("WojPrzed"),
-                          qPowPo = (string)zmiany.Element("PowPo ") ?? (string)zmiany.Element("PowPrzed"),
-                          qGmiPo = (string)zmiany.Element("GmiPo ") ?? (string)zmiany.Element("GmiPrzed"),
-                          qRodzPo = (string)zmiany.Element("RodzPo ") ?? (string)zmiany.Element("RodzPrzed"),
-                          qNazwaPo = (string)zmiany.Element("NazwaPo") ?? (string)zmiany.Element("NazwaPrzed"),
-                          qNazwaDodatkowaPo = (string?)zmiany.Element("NazwaDodatkowaPo") ?? (string)zmiany.Element("NazwaDodatkowaPrzed"),
-
-                      };
-          var find = context.Ter*/
-            var line = reader.ToString();
-
-            while (reader.Read())
+            doc.Load(Directory.GetCurrentDirectory() + "/File/TERC_Urzedowy_zmiany_2020-06-06_2022-09-11.xml");
+            var xList = doc.SelectNodes("/zmiany/zmiana"); // Znajdź węzeł zmiany, w której znajdują się informacje dot. modernizacji
+            foreach(XmlNode xNode in xList)
             {
-                
-
-               
-
-                string updateType = reader.Value;
-                IEnumerable<Terc> tercs = new List<Terc>();
-                switch (updateType)
+                var xTypKorekty = xNode.SelectSingleNode("TypKorekty");
+                switch(xTypKorekty.InnerText)
                 {
-                    case "M":
+                    //Dodanie jednostki administracyjnej
+                    case "D":
+                        string xWojPo = (xNode.SelectSingleNode("WojPo").InnerText);
+                        string xPowPo = (xNode.SelectSingleNode("PowPo").InnerText);
+                        string xGmiPo = (xNode.SelectSingleNode("GmiPo").InnerText);
+                        string xRodzPo = (xNode.SelectSingleNode("RodzPo").InnerText);
+                        string xNazwaPo = xNode.SelectSingleNode("NazwaPo").InnerText;
+                        string xNazwaDodatkowaPo = xNode.SelectSingleNode("NazwaDodatkowaPo").InnerText;
+                        string xStanPo = (xNode.SelectSingleNode("StanPo").InnerText);
+                        var query = new Terc
                         {
-                            //we need subtree
-                            string[] keys = new string[6];
-                            int i = 0;
-                            while (reader.Name != "zmiana")
-                            {
+                            WOJ = xWojPo,
+                            POW = xPowPo,
+                            GMI = xGmiPo,
+                            RODZ = xRodzPo,
+                            NAZWA = xNazwaPo,
+                            NAZWA_DOD = xNazwaDodatkowaPo,
+                            STAN_NA = xStanPo
+                        };
+                        _unitOfWork.Terc.Add(query);
+                        _unitOfWork.Save();
 
+                        break;
 
-                                //reader.ReadToDescendant("WojPrzed");
-                                if (reader.Value == null)
-                                   reader.Skip();
-                             
-                            
-                                
-                                
+                    //Delete old Jednostka Administracyjna
+                    case "U":
 
-                                else
-                                {
-                                    keys[i++] = reader.Value;
-                                    //Name of node
-                                    string change = reader.NodeType.ToString();
-                                    change = change.Substring(0, change.Length - 2);
-
-                                    //Value of node
-                                    string newValue = reader.Name;
-                                    reader.Skip();
-
-                                    //How to do this?
-                                    //var conn = new SqlConnection();
-                                    /*ar cmd = new SqlCommand(, );
-                                    cmd.ExecuteNonQuery();
-                                    SqlCommand cmd = new SqlCommand("UPDATE Terc SET {0} = {1} WHERE WOJ = ",DefaultConncection change, newValue, );
-                                */
-                                    Terc result = (from p in tercs
-                                                   where p.WOJ.Equals(keys[0]) &&
-                                                   p.POW.Equals(keys[1]) &&
-                                                   p.GMI.Equals(keys[2]) &&
-                                                   p.RODZ.Equals(keys[3]) &&
-                                                   p.NAZWA.Equals(keys[4]) &&
-                                                   p.NAZWA_DOD.Equals(keys[5])
-                                                   select p).SingleOrDefault();
-                                    /*if (result != null)
-                                    {
-                                        //Update Terc Set change = newValue Where result isNotNull
-                                        //result.Equals(change).Update(newValue);
-
-
-                                    }*/
-
-
-                                }
-                            }
-                            break;
-                        }
-                    default:
-                            break;
-                            
+                        var xWojPrzed = (xNode.SelectSingleNode("WojPrzed").InnerText);
+                        var xPowPrzed = (xNode.SelectSingleNode("PowPrzed").InnerText);
+                        var xGmiPrzed = (xNode.SelectSingleNode("GmiPrzed").InnerText);
+                        var xRodzPrzed = (xNode.SelectSingleNode("RodzPrzed").InnerText);
+                        var xNazwaPrzed = xNode.SelectSingleNode("NazwaPrzed").InnerText;
+                        var xNazwaDodatkowaPrzed = xNode.SelectSingleNode("NazwaDodatkowaPrzed").InnerText;
+                        var xStanPrzed = xNode.SelectSingleNode("Stan_Na").InnerText;
                         
 
-                } //Switch
+                        query = (from s in objTercList where s.WOJ ==  xWojPrzed && s.POW == xPowPrzed && s.GMI == xGmiPrzed && s.RODZ == xRodzPrzed && s.NAZWA == xNazwaPrzed select s).First();
+                        _unitOfWork.Terc.Remove(query);
+                        _unitOfWork.Save();
 
-            }//While
+                        break;
+
+                    default:
+                        break;
+
+
+                    //Update current Jednostka Administracyjne
+                    case "M":
+                         xWojPrzed = (xNode.SelectSingleNode("WojPrzed").InnerText);
+                         xPowPrzed = ((xNode.SelectSingleNode("PowPrzed").InnerText));
+                         xGmiPrzed = (xNode.SelectSingleNode("GmiPrzed").InnerText);
+                         xRodzPrzed = (xNode.SelectSingleNode("RodzPrzed").InnerText);
+                         xNazwaPrzed = xNode.SelectSingleNode("NazwaPrzed").InnerText;
+                         xNazwaDodatkowaPrzed = xNode.SelectSingleNode("NazwaDodatkowaPrzed").InnerText;
+                         xStanPrzed = xNode.SelectSingleNode("StanPrzed").InnerText;
+
+
+
+                         xWojPo = handleNull((xNode.SelectSingleNode("WojPo").InnerText), xWojPrzed);
+                         xPowPo = handleNull((xNode.SelectSingleNode("PowPo").InnerText), xPowPrzed);
+
+                         xGmiPo = handleNull((xNode.SelectSingleNode("GmiPo").InnerText), xGmiPrzed);
+                         xRodzPo = handleNull((xNode.SelectSingleNode("RodzPo").InnerText), xRodzPrzed);
+                         xNazwaPo = handleNull(xNode.SelectSingleNode("NazwaPo").InnerText, xNazwaPrzed);
+                         xNazwaDodatkowaPo = handleNull(xNode.SelectSingleNode("NazwaDodatkowaPo").InnerText, xNazwaDodatkowaPrzed);
+                         xStanPo = (xNode.SelectSingleNode("StanPo").InnerText);
+
+
+                        // etc
+
+                        // Jak zrobić żeby ignorował wartości NULL ??
+
+                        //How to use string as requirement?
+                        if (xNazwaDodatkowaPrzed.StartsWith("gmina") || xNazwaDodatkowaPrzed.Contains("miasto"))
+                        {
+                            query = (from s in objTercList where s.WOJ == xWojPrzed && s.POW != null && s.POW == xPowPrzed && s.GMI == xGmiPrzed && s.RODZ == xRodzPrzed && s.NAZWA == xNazwaPrzed select s).First();
+                            query.WOJ = xWojPo;
+                            query.POW = xPowPo;
+                            query.GMI = xGmiPo;
+                            query.RODZ = xRodzPo;
+                            query.NAZWA = xNazwaPo;
+                            query.NAZWA_DOD = xNazwaDodatkowaPo;
+                            query.STAN_NA = xStanPo;
+
+                            _unitOfWork.Terc.Update(query);
+                        }
+                        else if(xNazwaDodatkowaPrzed.StartsWith("powiat"))
+                        {
+                            query = (from s in objTercList where s.WOJ == xWojPrzed  && s.POW == xPowPrzed  && s.NAZWA == xNazwaPrzed select s).First();
+                            query.WOJ = xWojPo;
+                            query.POW = xPowPo;
+                            query.NAZWA = xNazwaPo;
+                            query.NAZWA_DOD = xNazwaDodatkowaPo;
+                            query.STAN_NA = xStanPo;
+
+                            _unitOfWork.Terc.Update(query);
+                        }
+                        else if (xNazwaDodatkowaPrzed.StartsWith("województwo"))
+                        {
+                            
+                            query = (from s in objTercList where s.WOJ == xWojPrzed && s.NAZWA == xNazwaPrzed select s).First();
+                            
+                            query.WOJ = xWojPo;
+                           
+                            query.NAZWA = xNazwaPo;
+                            query.NAZWA_DOD = xNazwaDodatkowaPo;
+                            query.STAN_NA = xStanPo;
+                            
+                            _unitOfWork.Terc.Update(query);
+
+                        }
+                        
+                        _unitOfWork.Save();
+                        break;
+
+                      
+                //WORKS, now polishing this little boy!!!
+
+                }
+
+                // wezły
+
+
+            }
+
+
+
+
+
+
             return View();
-        } //Search
-
-
-        /*var zmiana = new Dictionary<string, string>();
-        int i = 1;
-        foreach (var obj in objTercList)
-        {
-            zmiana.Add(obj.ToString(), reader.ChildNodes[i].ToString());
-            zmiana.Add(obj.ToString(), reader.ChildNodes[i + 7].ToString());
-            i++;*/
-
-
-        /*{ "POW", "reader.ChildNodes[2].ToString() , reader.ChildNodes[9].ToString()"},
-        { "GMI", "reader.ChildNodes[3].ToString() , reader.ChildNodes[10].ToString()"},
-        { "RODZ", "reader.ChildNodes[4].ToString() , reader.ChildNodes[11].ToString() "},
-        { "NAZWA", reader.ChildNodes[5].ToString() , reader.ChildNodes[12].ToString() },
-        { "NAZWA_DOD", "reader.ChildNodes[6].ToString()  , NazwaDodatkowaPo"},
-        { "STAN_NA", "StanPrzed , StanPo"}*/
-
-
-
-
-
-
-
-
-
-        // XmlReader reader = XmlReader(fs);
-        /*
-                       if(reader.NodeType == XmlNodeType.Element && reader.Name == "zmiana")
-                       {
-                           string val = reader.Value;
-                       }*/
-        /*   switch (line)
-               {
-                   case "M":
-                       {
-                           var change = new Dictionary<string, string>()
-                           {
-
-                           }*/
-
-        /*for (int i = 0; i < reader.ChildNodes.Count; i++)
-        {
-
-
-            *//*if (reader.ChildNodes[i].InnerText == null || reader.ChildNodes[i].Name.EndsWith("ed") )
-                continue;
-            else
-            {
-                string valueToChange = reader.ChildNodes[i].InnerText;
-
-            }*//*
-        }*/
-
-
-        /*case "Location":
-            Console.WriteLine("Your Location is : " + reader.ReadString());
-            break;*/
-
-
-
-
-
+            }
 
 
         // GET: TercsController/Details/5
