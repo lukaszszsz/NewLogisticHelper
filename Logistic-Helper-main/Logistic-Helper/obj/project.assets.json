@@ -2987,24 +2987,6 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "LogisticHelper.DataAccess/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "ChilkatDnCore": "9.5.0.90",
-          "LogisticHelper.Models": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "7.0.0-preview.4.22229.2",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0-preview.4.22229.2",
-          "System.IO.Compression.ZipFile": "4.3.0",
-          "jQuery.UI.Combined": "1.13.1"
-        },
-        "compile": {
-          "bin/placeholder/LogisticHelper.DataAccess.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/LogisticHelper.DataAccess.dll": {}
-        }
-      },
       "LogisticHelper.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -9778,11 +9760,6 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
-    "LogisticHelper.DataAccess/1.0.0": {
-      "type": "project",
-      "path": "../LogisticHelper.DataAccess/LogisticHelper.DataAccess.csproj",
-      "msbuildProject": "../LogisticHelper.DataAccess/LogisticHelper.DataAccess.csproj"
-    },
     "LogisticHelper.Models/1.0.0": {
       "type": "project",
       "path": "../LogisticHelper.Models/LogisticHelper.Models.csproj",
@@ -9792,7 +9769,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "ChilkatDnCore >= 9.5.0.90",
-      "LogisticHelper.DataAccess >= 1.0.0",
+      "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj",
       "LogisticHelper.Models >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.0-preview.4.22229.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.0-preview.4.22229.2",
@@ -9809,24 +9786,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MK\\.nuget\\packages\\": {},
-    "P:\\Visual\\Shared\\NuGetPackages": {}
+    "C:\\Users\\MK\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+      "projectUniqueName": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
       "projectName": "LogisticHelper",
-      "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+      "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
       "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
-      "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\obj\\",
+      "outputPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "P:\\Visual\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\MK\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9840,11 +9812,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
-              "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj"
+            "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
+              "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj"
             },
-            "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
-              "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
+            "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
+              "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
             }
           }
         }
@@ -9932,7 +9904,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -9943,6 +9915,15 @@
       "warningLevel": 1,
       "message": "Element jQuery.UI.Combined 1.13.1 zależy od elementu jQuery (>= 1.13.1), ale nie znaleziono elementu jQuery 1.13.1. Najlepsze rozpoznane przybliżone dopasowanie to jQuery 2.0.0.",
       "libraryId": "jQuery",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Nie można znaleźć projektu „G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj”. Sprawdź, czy odwołanie projektu jest prawidłowe i czy plik projektu istnieje.",
+      "libraryId": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj",
       "targetGraphs": [
         "net6.0"
       ]
