@@ -57,8 +57,21 @@ namespace LogisticHelper.Controllers
             return Json(search);
         }
 
+        //Connection function
+        public TerytWs1Client connection()
+        {
+            ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
+            /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
+            
+
+            client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
+            client.ClientCredentials.UserName.Password = "so6QT8ahG";
+            client.OpenAsync().Wait();
+            return client;
+        }
+
         //Function which allows for checking value of nodes
-      
+
         string handleNull(string xAfter, string xBefore)
         {
             if (xAfter == "")
@@ -73,23 +86,28 @@ namespace LogisticHelper.Controllers
             return xBefore;
 
         }
+       
         [HttpPost]
         public object Search(string search)
         {
+            TerytWs1Client client = connection();
 
-            ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
-            /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
-            IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
+            IEnumerable<Terc> TercObjList = _unitOfWork.Terc.GetAll();
+           
 
-            client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
-            client.ClientCredentials.UserName.Password = "so6QT8ahG";
-            client.OpenAsync().Wait();
+            //Teec is updated once a year
 
-            DateTime date = new DateTime(2020, 06, 06);
+            DateTime s = DateTime.Now;
+            string startingDate = s.ToShortDateString();
+
+            DateTime e = s.AddYears(-1);
+            string endingDate = e.ToShortDateString();
+
+          
 
             //Here we have XML compressed to ZIP, now figure out how to suck it to db
             //FileChange is a variable in which is file, it doesnt exist phyisically on disc, how to unzip it?
-            var UpdateFile = client.PobierzZmianyTercUrzedowyAsync(date, DateTime.Now);
+            var UpdateFile = client.PobierzZmianyTercUrzedowyAsync(e, s);
             PlikZmiany fileChange = UpdateFile.Result;
             string fileName = fileChange.nazwa_pliku;
             string zipContent = fileChange.plik_zawartosc;
@@ -98,7 +116,7 @@ namespace LogisticHelper.Controllers
             //working decoding from base64 to zip
             Chilkat.BinData zipData = new Chilkat.BinData();
             bool success = zipData.AppendEncoded(zipContent, "base64");
-            success = zipData.WriteFile(Directory.GetCurrentDirectory() + @"/File/out.zip");s
+            success = zipData.WriteFile(Directory.GetCurrentDirectory() + @"/File/out.zip");
 
 
 
@@ -116,7 +134,7 @@ namespace LogisticHelper.Controllers
            
             XmlDocument doc = new XmlDocument();
 
-            doc.Load(Directory.GetCurrentDirectory() + "/File/TERC_Urzedowy_zmiany_2020-06-06_2022-09-11.xml");
+            doc.Load(Directory.GetCurrentDirectory() + "/File/TERC_Urzedowy_zmiany_"+ endingDate + "_"+ startingDate + ".xml");
             var xList = doc.SelectNodes("/zmiany/zmiana"); // Znajdź węzeł zmiany, w której znajdują się informacje dot. modernizacji
             foreach(XmlNode xNode in xList)
             {
@@ -159,7 +177,7 @@ namespace LogisticHelper.Controllers
                         var xStanPrzed = xNode.SelectSingleNode("Stan_Na").InnerText;
                         
 
-                        query = (from s in objTercList where s.WOJ ==  xWojPrzed && s.POW == xPowPrzed && s.GMI == xGmiPrzed && s.RODZ == xRodzPrzed && s.NAZWA == xNazwaPrzed select s).First();
+                        query = (from toj in TercObjList where toj.WOJ ==  xWojPrzed && toj.POW == xPowPrzed && toj.GMI == xGmiPrzed && toj.RODZ == xRodzPrzed && toj.NAZWA == xNazwaPrzed select toj).First();
                         _unitOfWork.Terc.Remove(query);
                         _unitOfWork.Save();
 
@@ -198,7 +216,7 @@ namespace LogisticHelper.Controllers
                         //How to use string as requirement?
                         if (xNazwaDodatkowaPrzed.StartsWith("gmina") || xNazwaDodatkowaPrzed.Contains("miasto"))
                         {
-                            query = (from s in objTercList where s.WOJ == xWojPrzed && s.POW != null && s.POW == xPowPrzed && s.GMI == xGmiPrzed && s.RODZ == xRodzPrzed && s.NAZWA == xNazwaPrzed select s).First();
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.POW != null && toj.POW == xPowPrzed && toj.GMI == xGmiPrzed && toj.RODZ == xRodzPrzed && toj.NAZWA == xNazwaPrzed select toj).First();
                             query.WOJ = xWojPo;
                             query.POW = xPowPo;
                             query.GMI = xGmiPo;
@@ -211,7 +229,7 @@ namespace LogisticHelper.Controllers
                         }
                         else if(xNazwaDodatkowaPrzed.StartsWith("powiat"))
                         {
-                            query = (from s in objTercList where s.WOJ == xWojPrzed  && s.POW == xPowPrzed  && s.NAZWA == xNazwaPrzed select s).First();
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed  && toj.POW == xPowPrzed  && toj.NAZWA == xNazwaPrzed select toj).First();
                             query.WOJ = xWojPo;
                             query.POW = xPowPo;
                             query.NAZWA = xNazwaPo;
@@ -223,7 +241,7 @@ namespace LogisticHelper.Controllers
                         else if (xNazwaDodatkowaPrzed.StartsWith("województwo"))
                         {
                             
-                            query = (from s in objTercList where s.WOJ == xWojPrzed && s.NAZWA == xNazwaPrzed select s).First();
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.NAZWA == xNazwaPrzed select toj).First();
                             
                             query.WOJ = xWojPo;
                            
