@@ -57,7 +57,8 @@ namespace LogisticHelper.Controllers
             return Json(search);
         }
 
-        //Connection function
+        ///Function which allows to connect to TERYT API, returns TerytWS1Client 
+        ///which allows co operate on data stored inside
         public TerytWs1Client connection()
         {
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
@@ -79,14 +80,61 @@ namespace LogisticHelper.Controllers
             return xAfter;
 
         }
-        string nullBefore(string xBefore)
-        {
-            if (xBefore == "")
-               xBefore = "0";
-            return xBefore;
 
+
+        ///Add Jednostka Administracyjna which contains all data
+        Terc addJA(string xWoj, string xPow, string xGmi, string xRodz, string xNazwa, string xNazwaDodatkowa, string xStan)
+        {
+            var additionQuery = new Terc
+            {
+                WOJ = xWoj,
+                POW = xPow,
+                GMI = xGmi,
+                RODZ = xRodz,
+                NAZWA = xNazwa,
+                NAZWA_DOD = xNazwaDodatkowa,
+                STAN_NA = xStan
+            };
+            _unitOfWork.Terc.Add(additionQuery);
+            _unitOfWork.Save();
+            return additionQuery;
+
+            ///Polymorph version in case of powiat addition
         }
-       
+        Terc addJA(string xWoj, string xPow,  string xNazwa, string xNazwaDodatkowa, string xStan)
+        {
+            var additionQuery = new Terc
+            {
+                WOJ = xWoj,
+                POW = xPow,
+                NAZWA = xNazwa,
+                NAZWA_DOD = xNazwaDodatkowa,
+                STAN_NA = xStan
+            };
+            _unitOfWork.Terc.Add(additionQuery);
+            _unitOfWork.Save();
+            return additionQuery;
+        }
+                    ///Polymorph version in case of wojewodztwo addition
+        Terc addJA(string xWoj, string xNazwa, string xNazwaDodatkowa, string xStan)
+        {
+            var additionQuery = new Terc
+            {
+                WOJ = xWoj,
+            
+                NAZWA = xNazwa,
+                NAZWA_DOD = xNazwaDodatkowa,
+                STAN_NA = xStan
+            };
+            _unitOfWork.Terc.Add(additionQuery);
+            _unitOfWork.Save();
+            return additionQuery;
+        }
+           
+    
+
+
+
         [HttpPost]
         public object Search(string search)
         {
@@ -100,6 +148,7 @@ namespace LogisticHelper.Controllers
             DateTime s = DateTime.Now;
             string startingDate = s.ToShortDateString();
 
+            
             DateTime e = s.AddYears(-1);
             string endingDate = e.ToShortDateString();
 
@@ -150,20 +199,61 @@ namespace LogisticHelper.Controllers
                         string xNazwaPo = xNode.SelectSingleNode("NazwaPo").InnerText;
                         string xNazwaDodatkowaPo = xNode.SelectSingleNode("NazwaDodatkowaPo").InnerText;
                         string xStanPo = (xNode.SelectSingleNode("StanPo").InnerText);
-                        var query = new Terc
-                        {
-                            WOJ = xWojPo,
-                            POW = xPowPo,
-                            GMI = xGmiPo,
-                            RODZ = xRodzPo,
-                            NAZWA = xNazwaPo,
-                            NAZWA_DOD = xNazwaDodatkowaPo,
-                            STAN_NA = xStanPo
-                        };
-                        _unitOfWork.Terc.Add(query);
-                        _unitOfWork.Save();
 
+                        if (xNazwaDodatkowaPo.StartsWith("gmina") || xNazwaDodatkowaPo.Contains("miasto") || xNazwaDodatkowaPo.Contains("obszar"))
+                        {
+                            var queryCheck = (from toj in TercObjList where toj.WOJ == xWojPo && toj.POW == xPowPo && toj.GMI == xGmiPo && toj.RODZ == xRodzPo && toj.NAZWA == xNazwaPo select toj).FirstOrDefault();
+                            if (queryCheck != null)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                var queryAdd = addJA(xWojPo, xPowPo, xGmiPo, xRodzPo, xNazwaPo, xNazwaDodatkowaPo, xStanPo);
+
+                                break;
+
+                            }
+
+                        }
+                        else if (xNazwaDodatkowaPo.Contains("powiat"))
+                        {
+                            var queryCheck = (from toj in TercObjList where toj.WOJ == xWojPo && toj.POW == xPowPo && toj.NAZWA == xNazwaPo select toj).FirstOrDefault();
+                            if (queryCheck != null)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                var queryAdd = addJA(xWojPo, xPowPo, xNazwaPo, xNazwaDodatkowaPo, xStanPo);
+
+                                break;
+
+                            }
+                        }
+                        else if (xNazwaDodatkowaPo.Contains("wojewodztwo"))
+                        {
+                           var queryCheck = (from toj in TercObjList where toj.WOJ == xWojPo && toj.NAZWA == xNazwaPo select toj).FirstOrDefault();
+                            if (queryCheck != null)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                var queryAdd = addJA(xWojPo, xPowPo, xNazwaPo, xNazwaDodatkowaPo, xStanPo);
+
+                                break;
+
+                            }
+                        }
                         break;
+                     
+
+                       
+
 
                     //Delete old Jednostka Administracyjna
                     case "U":
@@ -177,7 +267,11 @@ namespace LogisticHelper.Controllers
                         var xStanPrzed = xNode.SelectSingleNode("Stan_Na").InnerText;
                         
 
-                        query = (from toj in TercObjList where toj.WOJ ==  xWojPrzed && toj.POW == xPowPrzed && toj.GMI == xGmiPrzed && toj.RODZ == xRodzPrzed && toj.NAZWA == xNazwaPrzed select toj).First();
+                       var query = (from toj in TercObjList where toj.WOJ ==  xWojPrzed && toj.POW == xPowPrzed && toj.GMI == xGmiPrzed && toj.RODZ == xRodzPrzed && toj.NAZWA == xNazwaPrzed select toj).FirstOrDefault();
+                        //check if value was not changed before
+                        if (query == null)
+                            break;
+
                         _unitOfWork.Terc.Remove(query);
                         _unitOfWork.Save();
 
@@ -216,7 +310,12 @@ namespace LogisticHelper.Controllers
                         //How to use string as requirement?
                         if (xNazwaDodatkowaPrzed.StartsWith("gmina") || xNazwaDodatkowaPrzed.Contains("miasto"))
                         {
-                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.POW != null && toj.POW == xPowPrzed && toj.GMI == xGmiPrzed && toj.RODZ == xRodzPrzed && toj.NAZWA == xNazwaPrzed select toj).First();
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.POW != null && toj.POW == xPowPrzed && toj.GMI == xGmiPrzed && toj.RODZ == xRodzPrzed && toj.NAZWA == xNazwaPrzed select toj ).FirstOrDefault();
+
+                            //check if value was not changed before
+                            if (query == null)
+                                break;
+
                             query.WOJ = xWojPo;
                             query.POW = xPowPo;
                             query.GMI = xGmiPo;
@@ -229,7 +328,12 @@ namespace LogisticHelper.Controllers
                         }
                         else if(xNazwaDodatkowaPrzed.StartsWith("powiat"))
                         {
-                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed  && toj.POW == xPowPrzed  && toj.NAZWA == xNazwaPrzed select toj).First();
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed  && toj.POW == xPowPrzed  && toj.NAZWA == xNazwaPrzed select toj).FirstOrDefault();
+
+                            //check if value was not changed before
+                            if (query == null)
+                                break;
+
                             query.WOJ = xWojPo;
                             query.POW = xPowPo;
                             query.NAZWA = xNazwaPo;
@@ -241,8 +345,11 @@ namespace LogisticHelper.Controllers
                         else if (xNazwaDodatkowaPrzed.StartsWith("województwo"))
                         {
                             
-                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.NAZWA == xNazwaPrzed select toj).First();
-                            
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.NAZWA == xNazwaPrzed select toj).FirstOrDefault();
+                            //check if value was not changed before
+                            if (query == null)
+                                break;
+
                             query.WOJ = xWojPo;
                            
                             query.NAZWA = xNazwaPo;
