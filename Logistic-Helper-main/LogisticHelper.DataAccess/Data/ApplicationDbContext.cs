@@ -15,6 +15,8 @@ namespace LogisticHelper.DataAccess
 
 
         public DbSet<Terc> Tercs { get; set; }
+
+       
     }
 
 }

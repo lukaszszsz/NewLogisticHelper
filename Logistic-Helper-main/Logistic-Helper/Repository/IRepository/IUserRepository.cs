@@ -7,7 +7,7 @@ namespace LogisticHelper.Repository.IRepository
     {
         void Update(User obj);
         void Save();
-
+     
     }
     
 }
