@@ -23,5 +23,6 @@ namespace LogisticHelper.Repository
         {
             _db.SaveChanges();
         }
+   
     }
 }

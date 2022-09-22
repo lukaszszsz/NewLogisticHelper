@@ -18,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 );
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
