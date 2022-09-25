@@ -1,22 +1,33 @@
 ﻿using LogisticHelper.Models;
+using LogisticHelper.Repository.IRepository;
+using LogisticHelper.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
+using ServiceReference1;
+using System.IO.Compression;
+using System.Xml;
+using Quartz;
+using Quartz.Impl;
 namespace LogisticHelper.Controllers
 {
-    public class HomeController : Controller
+    public class SimcController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+     
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+    
+        
+        public SimcController(IUnitOfWork unitOfWork)
         {
-            _logger = logger;
+           
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            return View(objSimcList);
         }
+    
 
         public IActionResult Privacy()
         {
@@ -26,7 +37,8 @@ namespace LogisticHelper.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

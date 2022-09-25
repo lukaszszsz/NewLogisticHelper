@@ -7,7 +7,7 @@ namespace LogisticHelper.Repository.IRepository
     {
         IUserRepository User{get;}
         ITercRepository Terc { get;}
-        ITercRepository Simc{ get;}
+        ISimcRepository Simc{ get;}
 
     void Save();
 
