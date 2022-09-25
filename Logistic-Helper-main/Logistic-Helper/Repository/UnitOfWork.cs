@@ -16,6 +16,8 @@ namespace LogisticHelper.Repository
         public IUserRepository User
         { get; private set;   }
         public ITercRepository Terc
+        { get; private set; } 
+        public ITercRepository Simc
         { get; private set; }
 
         public void Save()

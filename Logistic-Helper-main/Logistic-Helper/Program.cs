@@ -4,8 +4,7 @@ using LogisticHelper.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.Extensions.DependencyInjection;
-
-
+using FluentScheduler;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +16,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     )
 );
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddHostedService<TercUpdateJob>();
 
- 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

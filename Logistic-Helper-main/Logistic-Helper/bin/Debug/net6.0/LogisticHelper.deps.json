@@ -9,6 +9,7 @@
       "LogisticHelper/1.0.0": {
         "dependencies": {
           "ChilkatDnCore": "9.5.0.90",
+          "FluentScheduler": "5.5.1",
           "LogisticHelper.DataAccess": "1.0.0",
           "LogisticHelper.Models": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.0-preview.4.22229.2",
@@ -16,6 +17,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "7.0.0-preview.4.22229.2",
           "Microsoft.OData.Edm": "7.11.0",
           "MongoDB.Driver": "2.15.1",
+          "Quartz": "3.5.0",
           "System.IO.Compression.ZipFile": "4.3.0",
           "System.ServiceModel.Duplex": "4.8.1",
           "System.ServiceModel.Http": "4.8.1",
@@ -126,6 +128,14 @@
           "lib/net5.0/DnsClient.dll": {
             "assemblyVersion": "1.6.0.0",
             "fileVersion": "1.6.0.0"
+          }
+        }
+      },
+      "FluentScheduler/5.5.1": {
+        "runtime": {
+          "lib/netstandard2.1/FluentScheduler.dll": {
+            "assemblyVersion": "5.5.1.0",
+            "fileVersion": "5.5.1.0"
           }
         }
       },
@@ -889,6 +899,19 @@
           "System.Threading.Timer": "4.0.1",
           "System.Xml.ReaderWriter": "4.0.11",
           "System.Xml.XDocument": "4.0.11"
+        }
+      },
+      "Quartz/3.5.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0-preview.4.22229.4",
+          "System.Configuration.ConfigurationManager": "5.0.0",
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Quartz.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.0.0"
+          }
         }
       },
       "runtime.native.System/4.3.0": {
@@ -2080,9 +2103,11 @@
       "LogisticHelper.DataAccess/1.0.0": {
         "dependencies": {
           "ChilkatDnCore": "9.5.0.90",
+          "FluentScheduler": "5.5.1",
           "LogisticHelper.Models": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.0-preview.4.22229.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0-preview.4.22229.2",
+          "Quartz": "3.5.0",
           "System.IO.Compression.ZipFile": "4.3.0",
           "jQuery.UI.Combined": "1.13.1"
         },
@@ -2093,8 +2118,10 @@
       "LogisticHelper.Models/1.0.0": {
         "dependencies": {
           "ChilkatDnCore": "9.5.0.90",
+          "FluentScheduler": "5.5.1",
           "Microsoft.EntityFrameworkCore": "7.0.0-preview.4.22229.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0-preview.4.22229.2",
+          "Quartz": "3.5.0",
           "System.IO.Compression.ZipFile": "4.3.0",
           "jQuery.UI.Combined": "1.13.1"
         },
@@ -2144,6 +2171,13 @@
       "sha512": "sha512-kVd3IxAs5EQZSKTQhMUaJmuOQ1n2VWKExatdqNszsxxKzTB+Toaxx3M1DsN3yKfHloMXPmt6fgfcOqRwKheoUQ==",
       "path": "dnsclient/1.6.0",
       "hashPath": "dnsclient.1.6.0.nupkg.sha512"
+    },
+    "FluentScheduler/5.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OwehD7vZ1CFAboLPrfBTibz/FeKg8DK1h242u0Y050dbfcOlb+d4S/iGBNt/yHaHIhCsmPiQqQjG13e441xWLA==",
+      "path": "fluentscheduler/5.5.1",
+      "hashPath": "fluentscheduler.5.5.1.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -2536,6 +2570,13 @@
       "sha512": "sha512-ypsCvIdCZ4IoYASJHt6tF2fMo7N30NLgV1EbmC+snO490OMl9FvVxmumw14rhReWU3j3g7BYudG6YCrchwHJlA==",
       "path": "netstandard.library/1.6.0",
       "hashPath": "netstandard.library.1.6.0.nupkg.sha512"
+    },
+    "Quartz/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tgWAByEvwWC/CE4VXfrMgt7h5FXdFKIl9Sf5X/0d4yq1rsvSgiVbcAPdFUFAgIOOTcLTtRXp1rXBGqHukIWAgQ==",
+      "path": "quartz/3.5.0",
+      "hashPath": "quartz.3.5.0.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",
