@@ -9791,11 +9791,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
       "projectName": "LogisticHelper",
       "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
       "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
       "outputPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\obj\\",
+=======
+      "projectUniqueName": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+      "projectName": "LogisticHelper",
+      "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+      "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
+      "outputPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\obj\\",
+>>>>>>> 03a527880e19ea041e25349be4147366f2ede0e8
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MK\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9812,11 +9820,19 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+<<<<<<< HEAD
             "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
               "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj"
             },
             "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
               "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
+=======
+            "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj": {
+              "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.DataAccess\\LogisticHelper.DataAccess.csproj"
+            },
+            "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj": {
+              "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj"
+>>>>>>> 03a527880e19ea041e25349be4147366f2ede0e8
             }
           }
         }

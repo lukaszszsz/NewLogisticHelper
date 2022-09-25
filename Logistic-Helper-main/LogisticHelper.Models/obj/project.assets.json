@@ -8954,11 +8954,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
       "projectName": "LogisticHelper.Models",
       "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
       "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
       "outputPath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\obj\\",
+=======
+      "projectUniqueName": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
+      "projectName": "LogisticHelper.Models",
+      "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\LogisticHelper.Models.csproj",
+      "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
+      "outputPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Models\\obj\\",
+>>>>>>> 03a527880e19ea041e25349be4147366f2ede0e8
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MK\\AppData\\Roaming\\NuGet\\NuGet.Config",

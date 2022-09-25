@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "+MqA7QH55phac+WOeSwnhBp0ANWKUfSX4l7TBqheqEO8/Ud1CyrRn1L2BMwi1+1eUC4/vZdM34HmPTY1m/Jiug==",
   "success": false,
   "projectFilePath": "G:\\Rzeczy_Programowanie\\PI2023\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+=======
+  "dgSpecHash": "a9TVOJ+2e9qYIaFzGNbuvFkA8kzWTV7NZAC8wSfWIMa+S49+S9g3le7EKGxJr3r/jxn/aKIoHG6ZSelS4zGF9Q==",
+  "success": true,
+  "projectFilePath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\LogisticHelper.csproj",
+>>>>>>> 03a527880e19ea041e25349be4147366f2ede0e8
   "expectedPackageFiles": [
     "C:\\Users\\MK\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\MK\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",

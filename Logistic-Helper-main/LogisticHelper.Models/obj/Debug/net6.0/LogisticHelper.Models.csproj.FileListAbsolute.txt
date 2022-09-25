@@ -23,6 +23,7 @@ N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\ref\LogisticHelper.Models.dll
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.pdb
 N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.genruntimeconfig.cache
+<<<<<<< HEAD
 G:\Rzeczy_Programowanie\PI2023\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.deps.json
 G:\Rzeczy_Programowanie\PI2023\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.runtimeconfig.json
 G:\Rzeczy_Programowanie\PI2023\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.dll
@@ -37,3 +38,19 @@ G:\Rzeczy_Programowanie\PI2023\NewLogisticHelper\Logistic-Helper-main\LogisticHe
 G:\Rzeczy_Programowanie\PI2023\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.pdb
 G:\Rzeczy_Programowanie\PI2023\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.genruntimeconfig.cache
 G:\Rzeczy_Programowanie\PI2023\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\ref\LogisticHelper.Models.dll
+=======
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.deps.json
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.runtimeconfig.json
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.pdb
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.csproj.AssemblyReference.cache
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.GeneratedMSBuildEditorConfig.editorconfig
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.AssemblyInfoInputs.cache
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.AssemblyInfo.cs
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.csproj.CoreCompileInputs.cache
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\refint\LogisticHelper.Models.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.pdb
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.genruntimeconfig.cache
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\ref\LogisticHelper.Models.dll
+>>>>>>> 03a527880e19ea041e25349be4147366f2ede0e8
