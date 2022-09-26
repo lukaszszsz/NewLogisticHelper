@@ -37,31 +37,7 @@ namespace LogisticHelper.Controllers
             IEnumerable<Terc> objUserList = _unitOfWork.Terc.GetAll();
 
             return View(objUserList);
-        }
-        //AUTOCOMPLETE FUNCTION FOR SEARCH PURPOSES
-        //Function allows us to search data from table Terc, thanks to this,
-        //we can find Gmina, Powiat and Wojewodztwo, just by  typing in textbox
-        [HttpPost]
-        public JsonResult AutoComplete(string input)
-        {
-            //create a list of all Terc elements
-            IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
-            //scan them
-            var search = (from Terc in objTercList
-                          where
-                           Terc.NAZWA.StartsWith(input)
-                          select new
-                          {
-                              
-                              label = Terc.NAZWA +", "+ Terc.NAZWA_DOD,
-                              val = Terc.STAN_NA,
-
-                          }).Take(5).ToList();
-            return Json(search);
-        }
-
-        ///Function which allows to connect to TERYT API, returns TerytWS1Client 
-        ///which allows co operate on data stored inside
+        }  
         public TerytWs1Client connection()
         {
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
@@ -73,6 +49,34 @@ namespace LogisticHelper.Controllers
             client.OpenAsync().Wait();
             return client;
         }
+        //AUTOCOMPLETE FUNCTION FOR SEARCH PURPOSES
+        //Function allows us to search data from table Terc, thanks to this,
+        //we can find Gmina, Powiat and Wojewodztwo, just by  typing in textbox
+        [HttpPost]
+        public JsonResult AutoComplete(string input)
+        {
+            TerytWs1Client client = connection();
+
+            //create a list of all Terc elements
+            
+            IEnumerable<Terc> objTercList = _unitOfWork.Terc.GetAll();
+            //scan them
+            var search = (from Terc in objTercList
+                          where
+                           Terc.NAZWA.StartsWith(input)
+                          select new
+                          {
+
+                              label = Terc.NAZWA,
+                              val =Terc.WOJ + Terc.POW + Terc.GMI + Terc.RODZ,
+
+                          }).Take(5).ToList();
+            return Json(search);
+        }
+
+        ///Function which allows to connect to TERYT API, returns TerytWS1Client 
+        ///which allows co operate on data stored inside
+     
 
         //Function which allows for checking value of nodes
 
@@ -150,6 +154,8 @@ namespace LogisticHelper.Controllers
         public void Schedule()
         {
             TerytWs1Client client = connection();
+
+            
 
             IEnumerable<Terc> TercObjList = _unitOfWork.Terc.GetAll();
 
