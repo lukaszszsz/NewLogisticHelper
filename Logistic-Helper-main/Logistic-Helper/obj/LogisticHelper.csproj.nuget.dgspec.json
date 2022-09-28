@@ -55,6 +55,10 @@
               "target": "Package",
               "version": "[5.5.1, )"
             },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
@@ -76,6 +80,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.15.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2-beta2, )"
             },
             "Quartz": {
               "target": "Package",
@@ -194,6 +202,10 @@
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2-beta2, )"
+            },
             "Quartz": {
               "target": "Package",
               "version": "[3.5.0, )"
@@ -283,6 +295,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2-beta2, )"
             },
             "Quartz": {
               "target": "Package",

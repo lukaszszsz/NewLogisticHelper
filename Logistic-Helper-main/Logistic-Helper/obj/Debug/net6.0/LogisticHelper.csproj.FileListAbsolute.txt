@@ -576,3 +576,11 @@ G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogi
 G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\obj\Debug\net6.0\ref\LogisticHelper.dll
 G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\FluentScheduler.dll
 G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\Quartz.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\System.Web.Mvc.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\System.Web.Razor.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\System.Web.Helpers.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\System.Web.WebPages.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
+G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\Logistic-Helper\bin\Debug\net6.0\Newtonsoft.Json.dll

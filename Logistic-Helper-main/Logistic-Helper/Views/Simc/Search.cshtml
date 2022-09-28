@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Search";
 }
-
+<div id = "koza" style = "width:100px; height:100px;">
+    </div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
 @using (Html.BeginForm("Search", "Simc", FormMethod.Post))
 {
@@ -21,11 +22,29 @@
                 source: function (request, response) {
                     $.ajax({
                         url: '/Simc/AutoComplete/',
-                        data: { "input": request.term },
                         type: "POST",
+                        dataType:"json",
+                        data: { "input": request.term },
+
                         success: function (data) {
                             response($.map(data, function (item) {
-                                return item;
+                                 return { 
+                                     
+                                     label:item.label,
+                                     val:item.val,
+                                     
+                                     woj:item.woj, 
+                                     pow:item.pow, 
+                                     gmi:item.gmi,
+                                     rodz_gmi:item.rodz_gmi,
+                                     rm:item.rm,
+                                     mz:item.mz,
+                                     nazwa:item.nazwa,
+                                     sym:item.sym,
+                                     sympod:item.sympod,
+                                     stan_na:item.stan_na
+                                     
+                                    };
                             }))
                         },
                         error: function (response) {
@@ -37,14 +56,17 @@
                     });
                 },
                 select: function (e, i) {
-                    //get selected value
-                    //$("#personNameValue").val(i.item.val);
+                 //  get selected value
+                    $("#koza").val(i.item.val);
                 },
                 minLength: 1
             });
         });
     </script>
-}
+    }
+
+
+
 @*
 <form>
   <div class="form-group">
@@ -59,3 +81,4 @@
  
   <button type="submit" class="btn btn-primary">Szukaj</button>
 </form>*@
+

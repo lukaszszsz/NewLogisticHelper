@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2-beta2, )"
+            },
             "Quartz": {
               "target": "Package",
               "version": "[3.5.0, )"
@@ -155,6 +159,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0-preview.4.22229.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2-beta2, )"
             },
             "Quartz": {
               "target": "Package",

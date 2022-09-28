@@ -8,6 +8,9 @@ using System.Xml;
 using Quartz;
 using Quartz.Impl;
 using System.Linq;
+using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace LogisticHelper.Controllers
 {
@@ -33,9 +36,10 @@ namespace LogisticHelper.Controllers
         public IActionResult Search()
         {
 
-            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            //Enumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            
 
-            return View(objSimcList);
+            return View();
         }
         public TerytWs1Client connection()
         {
@@ -49,7 +53,7 @@ namespace LogisticHelper.Controllers
             return client;
         }
         [HttpPost]
-        public JsonResult AutoComplete(string input)
+        public string AutoComplete(string input)
         {
             TerytWs1Client client = connection();
 
@@ -59,16 +63,29 @@ namespace LogisticHelper.Controllers
             //scan them
             var search = (from Simc in objSimcList
                           where
-                           Simc.NAZWA.StartsWith(input) 
+                           Simc.NAZWA.StartsWith(input)
                           select new
                           {
+                         //client.WyszukajMiejscowoscAsync(Simc.NAZWA, Simc.SYM)
+                            label = Simc.NAZWA,
+                            val = Simc.NAZWA,
+                            woj = Simc.WOJ,
+                            pow = Simc.POW,
+                            gmi = Simc.GMI,
+                            rodz_gmi = Simc.RODZ_GMI,
+                            rm = Simc.RM,
+                            mz = Simc.MZ,
+                            nazwa = Simc.NAZWA,
 
-                              label = client.PobierzListeMiejscowosciWRodzajuGminyAsync(Simc.WOJ, Simc.POW, Simc.GMI, Simc.RODZ_GMI, Convert.ToDateTime(Simc.STAN_NA)).Result,                      
-                              val = Simc.STAN_NA,
+                            sym = Simc.SYM,
+                            sympod = Simc.SYMPOD,
+                            stan_na = Simc.STAN_NA
+    
+                             
 
                           }).Take(10).ToList();
 
-            var result = search[0].label.Take(10).ToList();
+            /*var result = search[0].label.Take(10).ToList();
             var final = (from Simc in result
                          where
      Simc.Nazwa.StartsWith(input)
@@ -77,9 +94,28 @@ namespace LogisticHelper.Controllers
                              label = Simc.Nazwa +" " + Simc.Powiat ,
                              val = Simc.Nazwa,
 
-                         }).Take(5).ToList();
-            return Json(final) ;
+                         }).Take(5).ToList();*/
+            //ViewBag.Message = "Selected SS Name: " + search.Last(;
+            string jsson = JsonConvert.SerializeObject(search);
+            return jsson ;
         }
+
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            //Zastanowić się jak rozgryźć wyszukiwarkę, 2 autocomplete? Jedna ze stringiem dla użytkownika, jedna dla sprzętu?
+            var ss = AutoComplete(search);
+           dynamic jsoon = JsonConvert.DeserializeObject(ss);
+
+            //WORKS!!!!!
+            //Now have to write correct instruction to show data, but the principal of it works 
+            //Whole JSON is being send, so np to choose data
+            string info = jsoon.First.pow;
+
+            ViewBag.Message = "Selected GMI Name: " + info ;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
