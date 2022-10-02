@@ -59,6 +59,8 @@ namespace LogisticHelper.Controllers
 
             //create a list of all Terc elements
             IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            
+           
 
             //scan them
             var search = (from Simc in objSimcList
@@ -66,7 +68,7 @@ namespace LogisticHelper.Controllers
                            Simc.NAZWA.StartsWith(input)
                           select new
                           {
-                         //client.WyszukajMiejscowoscAsync(Simc.NAZWA, Simc.SYM)
+
                             label = Simc.NAZWA,
                             val = Simc.NAZWA,
                             woj = Simc.WOJ,
@@ -79,40 +81,46 @@ namespace LogisticHelper.Controllers
 
                             sym = Simc.SYM,
                             sympod = Simc.SYMPOD,
-                            stan_na = Simc.STAN_NA
+                            stan_na = Simc.STAN_NA,
     
-                             
 
-                          }).Take(10).ToList();
 
-            /*var result = search[0].label.Take(10).ToList();
-            var final = (from Simc in result
-                         where
-     Simc.Nazwa.StartsWith(input)
-                         select new
-                         {
-                             label = Simc.Nazwa +" " + Simc.Powiat ,
-                             val = Simc.Nazwa,
+                          }).Take(5).ToList();
 
-                         }).Take(5).ToList();*/
-            //ViewBag.Message = "Selected SS Name: " + search.Last(;
+ 
             string jsson = JsonConvert.SerializeObject(search);
             return jsson ;
         }
 
         [HttpPost]
-        public ActionResult Search(string search)
-        {
+        public async Task<ActionResult> SearchAsync(string search)
+      {
+            var client = connection();
             //Zastanowić się jak rozgryźć wyszukiwarkę, 2 autocomplete? Jedna ze stringiem dla użytkownika, jedna dla sprzętu?
             var ss = AutoComplete(search);
            dynamic jsoon = JsonConvert.DeserializeObject(ss);
+            ServiceReference1.Miejscowosc[] village;
 
+            foreach (var obj in jsoon)
+            {
+                string objNazwa = obj.nazwa;
+                string objSym= obj.sym;
+              //  jsoon.Add(obj);
+                village = await client.WyszukajMiejscowoscAsync(objNazwa,objSym );
+                
+            }
             //WORKS!!!!!
             //Now have to write correct instruction to show data, but the principal of it works 
             //Whole JSON is being send, so np to choose data
             string info = jsoon.First.pow;
+          
 
-            ViewBag.Message = "Selected GMI Name: " + info ;
+
+            //znajdz
+           
+
+           
+
             return View();
         }
 
