@@ -11,19 +11,20 @@ using System.Linq;
 using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace LogisticHelper.Controllers
 {
     public class SimcController : Controller
     {
-     
+
         private readonly IUnitOfWork _unitOfWork;
 
-    
-        
+
+
         public SimcController(IUnitOfWork unitOfWork)
         {
-           
+
             _unitOfWork = unitOfWork;
         }
 
@@ -37,7 +38,7 @@ namespace LogisticHelper.Controllers
         {
 
             //Enumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
-            
+
 
             return View();
         }
@@ -59,8 +60,8 @@ namespace LogisticHelper.Controllers
 
             //create a list of all Terc elements
             IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
-            
-           
+
+
 
             //scan them
             var search = (from Simc in objSimcList
@@ -69,57 +70,69 @@ namespace LogisticHelper.Controllers
                           select new
                           {
 
-                            label = Simc.NAZWA,
-                            val = Simc.NAZWA,
-                            woj = Simc.WOJ,
-                            pow = Simc.POW,
-                            gmi = Simc.GMI,
-                            rodz_gmi = Simc.RODZ_GMI,
-                            rm = Simc.RM,
-                            mz = Simc.MZ,
-                            nazwa = Simc.NAZWA,
+                              label = Simc.NAZWA,
+                              val = Simc.NAZWA,
+                              woj = Simc.WOJ,
+                              pow = Simc.POW,
+                              gmi = Simc.GMI,
+                              rodz_gmi = Simc.RODZ_GMI,
+                              rm = Simc.RM,
+                              mz = Simc.MZ,
+                              nazwa = Simc.NAZWA,
 
-                            sym = Simc.SYM,
-                            sympod = Simc.SYMPOD,
-                            stan_na = Simc.STAN_NA,
-    
+                              sym = Simc.SYM,
+                              sympod = Simc.SYMPOD,
+                              stan_na = Simc.STAN_NA,
+
 
 
                           }).Take(5).ToList();
 
- 
+
             string jsson = JsonConvert.SerializeObject(search);
-            return jsson ;
+            return jsson;
         }
 
         [HttpPost]
         public async Task<ActionResult> SearchAsync(string search)
-      {
+        {
             var client = connection();
             //Zastanowić się jak rozgryźć wyszukiwarkę, 2 autocomplete? Jedna ze stringiem dla użytkownika, jedna dla sprzętu?
             var ss = AutoComplete(search);
-           dynamic jsoon = JsonConvert.DeserializeObject(ss);
-            ServiceReference1.Miejscowosc[] village;
+            dynamic jsoon = JsonConvert.DeserializeObject(ss);
+            var villages = new List<Miejscowosc[]> { };
 
             foreach (var obj in jsoon)
             {
                 string objNazwa = obj.nazwa;
-                string objSym= obj.sym;
-              //  jsoon.Add(obj);
-                village = await client.WyszukajMiejscowoscAsync(objNazwa,objSym );
-                
+                string objSym = obj.sym;
+                //  jsoon.Add(obj);
+
+                villages.Add(await client.WyszukajMiejscowoscAsync(objNazwa, objSym)); // <---- Za każdym razem, tworzy się tutaj obiekt Miejscowość, teraz trzeba ją wyrucić na ekran
+
             }
             //WORKS!!!!!
             //Now have to write correct instruction to show data, but the principal of it works 
             //Whole JSON is being send, so np to choose data
-            string info = jsoon.First.pow;
-          
 
-
-            //znajdz
-           
+          /*  foreach (ServiceReference1.Miejscowosc[] obj in villages)
+            {
+            }*/
 
            
+            //Working!!!
+            //Now find out how to show links on page!
+            foreach (var item in villages)
+            {
+                for (int i = 0; i < item.Length; i++)
+                {
+                    var powiat = item[i].Powiat;
+                    Debug.WriteLine("Powiat to: {0}", powiat);
+
+                }
+            }
+
+
 
             return View();
         }
