@@ -37,10 +37,11 @@ namespace LogisticHelper.Controllers
         public IActionResult Search()
         {
 
-            //Enumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            var one = objSimcList.FirstOrDefault();
 
 
-            return View();
+            return View(one);
         }
         public TerytWs1Client connection()
         {
@@ -100,7 +101,7 @@ namespace LogisticHelper.Controllers
             //Zastanowić się jak rozgryźć wyszukiwarkę, 2 autocomplete? Jedna ze stringiem dla użytkownika, jedna dla sprzętu?
             var ss = AutoComplete(search);
             dynamic jsoon = JsonConvert.DeserializeObject(ss);
-            var villages = new List<Miejscowosc[]> { };
+            var villagesArrays = new List<Miejscowosc[]> { };
 
             foreach (var obj in jsoon)
             {
@@ -108,34 +109,37 @@ namespace LogisticHelper.Controllers
                 string objSym = obj.sym;
                 //  jsoon.Add(obj);
 
-                villages.Add(await client.WyszukajMiejscowoscAsync(objNazwa, objSym)); // <---- Za każdym razem, tworzy się tutaj obiekt Miejscowość, teraz trzeba ją wyrucić na ekran
+                villagesArrays.Add(await client.WyszukajMiejscowoscAsync(objNazwa, objSym)); // <---- Za każdym razem, tworzy się tutaj obiekt Miejscowość, teraz trzeba ją wyrucić na ekran
 
             }
             //WORKS!!!!!
             //Now have to write correct instruction to show data, but the principal of it works 
             //Whole JSON is being send, so np to choose data
 
-          /*  foreach (ServiceReference1.Miejscowosc[] obj in villages)
-            {
-            }*/
+            /*  foreach (ServiceReference1.Miejscowosc[] obj in villagesArrays)
+              {
+              }*/
 
-           
+
             //Working!!!
             //Now find out how to show links on page!
-            foreach (var item in villages)
+          
+            foreach (var item in villagesArrays)
             {
                 for (int i = 0; i < item.Length; i++)
                 {
                     var powiat = item[i].Powiat;
                     Debug.WriteLine("Powiat to: {0}", powiat);
 
+
                 }
             }
 
 
 
-            return View();
+            return View(villagesArrays);
         }
+       
 
         public IActionResult Privacy()
         {

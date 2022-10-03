@@ -143,7 +143,7 @@ namespace LogisticHelper.Controllers
         [HttpPost]
         public object Search(string search)
         {
-       
+            Schedule();
 
             return View();
         }
