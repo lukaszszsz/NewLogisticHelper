@@ -1,0 +1,67 @@
+﻿@{
+    @model Simc
+    
+
+    ViewData["Title"] = "Details";
+}
+<div id = "koza" style = "width:100px; height:100px;">
+    </div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+
+Details
+        <form method = "post">
+    <div class = "border p-3 mt-4">
+        <div class = "row pb-2">
+            <h1 class = "text-primary">Delete User</h1>
+            <hr />
+        </div>
+
+
+
+<div class = "mb-3">
+            <label asp-for="WOJ">Wojewodztwo</label>
+            <input asp-for = "WOJ" class = "form-control"/>
+            <span asp-validation-for="WOJ" class= "text-danger"></span>
+        </div>
+             <div class = "mb-3">
+            <label asp-for="POW">Powiat</label>
+            <input asp-for = "POW" class = "form-control"/>
+            <span asp-validation-for="POW" class= "text-danger"></span>
+
+            <label asp-for="NAZWA">Nazwa</label>
+            <input asp-for = "NAZWA" type = "text" class = "form-control"/>
+            <span asp-validation-for="NAZWA" class= "text-danger"></span>
+
+           
+
+            <button type= "submit" class = "btn btn-primary" style = "width:150px">Delete</button>
+            <a asp-for="User" asp-action="Index" class = "btn btn-secondary" style ="width:150px">Back to List</a>
+        </div>
+    </div>
+
+</form>
+@section Scripts
+{
+    @{
+        <partial name = "_ValidationScriptsPartial"/>
+    }
+
+}
+
+
+
+@*
+<form>
+  <div class="form-group">
+    <label for="GMIFORM">Podaj Gminę</label>
+    <input type="text" class="form-control" id="GMI" placeholder="Podaj Gminę">
+
+  </div>
+  <div class="form-group">
+    <label for="POW">Jaki Powiat</label>
+    <input type="text" class="form-control" id="POW" placeholder="POW">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Szukaj</button>
+</form>*@
+

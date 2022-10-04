@@ -11,7 +11,7 @@ namespace LogisticHelper.Controllers
 {
     public class UserController : Controller
     {
-      
+
         // GET: UserController
         private readonly IUnitOfWork _unitOfWork;
         public UserController(IUnitOfWork unitOfWork)
@@ -23,7 +23,7 @@ namespace LogisticHelper.Controllers
 
         public IActionResult Index()
         {
-           
+
             IEnumerable<User> objUserList = _unitOfWork.User.GetAll();
             return View(objUserList);
         }
@@ -129,6 +129,6 @@ namespace LogisticHelper.Controllers
 
             return RedirectToAction("Index");
         }
-      
+
     }
 }

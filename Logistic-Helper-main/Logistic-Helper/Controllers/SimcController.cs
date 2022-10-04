@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
+
+
 namespace LogisticHelper.Controllers
 {
     public class SimcController : Controller
@@ -95,13 +97,13 @@ namespace LogisticHelper.Controllers
         }
         public IActionResult Found()
         {
-
-
-
-            return View();
+           
+         
+             return View();
         }
 
         [HttpPost]
+       
         public async Task<ActionResult> FoundAsync(string search)
         {
             var client = connection();
@@ -139,8 +141,7 @@ namespace LogisticHelper.Controllers
                 {
                     villages.Add(item[i]);
                     var powiat = item[i].Powiat;
-                    Debug.WriteLine("Powiat to: " + powiat);
-                    TempData["isValue"] = "Available";
+                 
 
                 }
             }
@@ -149,12 +150,31 @@ namespace LogisticHelper.Controllers
 
             return View(villages);
         }
-       
 
-        public IActionResult Privacy()
+        //Why symbol == null?
+        //GET /Details/sym
+        [HttpGet]
+        public IActionResult Details(string? symbol, string? wojewodztwo)
         {
-            return View();
+            if (symbol == null )
+            {
+                return NotFound();
+            }
+            
+            var getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
+            if (getCityToSend == null)
+            {
+                return NotFound();
+            }
+
+            return View(getCityToSend);
         }
+
+
+       
+        
+
+          
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
