@@ -38,10 +38,10 @@ namespace LogisticHelper.Controllers
         {
 
             IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
-            var one = objSimcList.FirstOrDefault();
+            
 
 
-            return View(one);
+            return View(objSimcList);
         }
         public TerytWs1Client connection()
         {
@@ -93,9 +93,16 @@ namespace LogisticHelper.Controllers
             string jsson = JsonConvert.SerializeObject(search);
             return jsson;
         }
+        public IActionResult Found()
+        {
+
+
+
+            return View();
+        }
 
         [HttpPost]
-        public async Task<ActionResult> SearchAsync(string search)
+        public async Task<ActionResult> FoundAsync(string search)
         {
             var client = connection();
             //Zastanowić się jak rozgryźć wyszukiwarkę, 2 autocomplete? Jedna ze stringiem dla użytkownika, jedna dla sprzętu?
@@ -124,20 +131,23 @@ namespace LogisticHelper.Controllers
             //Working!!!
             //Now find out how to show links on page!
           
+            List<Miejscowosc> villages = new List<Miejscowosc>();
+
             foreach (var item in villagesArrays)
             {
                 for (int i = 0; i < item.Length; i++)
                 {
+                    villages.Add(item[i]);
                     var powiat = item[i].Powiat;
-                    Debug.WriteLine("Powiat to: {0}", powiat);
-
+                    Debug.WriteLine("Powiat to: " + powiat);
+                    TempData["isValue"] = "Available";
 
                 }
             }
 
+            
 
-
-            return View(villagesArrays);
+            return View(villages);
         }
        
 
