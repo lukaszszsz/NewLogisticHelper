@@ -166,21 +166,239 @@ namespace LogisticHelper.Controllers
             {
                 return NotFound();
             }
-
+            Schedule();
             return View(getCityToSend);
         }
 
 
-       
-        
-
-          
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        Simc addJA(string xWoj, string xPow, string xGmi, string xRodz, string xNazwa, string xRm, string xNz, string xSympod, string xStan)
         {
-            // return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            return View();
+            var additionQuery = new Simc
+            {
+                WOJ = xWoj,
+                POW = xPow,
+                GMI = xGmi,
+                RODZ_GMI = xRodz,
+                RM = xRm,
+                MZ = xNz,
+                NAZWA = xNazwa,
+                SYM = xSym,
+                SYMPOD = xSympod,
+                STAN_NA = xStan
+            };
+            _unitOfWork.Simc.Add(additionQuery);
+            _unitOfWork.Save();
+            return additionQuery;
         }
+
+
+        public void Schedule()
+        {
+            TerytWs1Client client = connection();
+
+
+
+            IEnumerable<Simc> SimcObjList = _unitOfWork.Simc.GetAll();
+
+
+            //Teec is updated once a year
+
+            DateTime prsD = DateTime.Now;
+            string presentDate = prsD.ToShortDateString();
+
+            DateTime pstD = prsD.AddYears(-1);
+            string pastDate = pstD.ToShortDateString();
+
+
+            
+
+
+
+            //Here we have XML compressed to ZIP, now figure out how to suck it to db
+            //FileChange is a variable in which is file, it doesnt exist phyisically on disc, how to unzip it?
+            var UpdateFile = client.PobierzZmianySimcUrzedowyAsync(pstD, prsD);
+            PlikZmiany fileChange = UpdateFile.Result;
+            string fileName = fileChange.nazwa_pliku;
+            string zipContent = fileChange.plik_zawartosc;
+            string scenario = fileChange.opis;
+
+            //working decoding from base64 to zip
+            Chilkat.BinData zipData = new Chilkat.BinData();
+            bool success = zipData.AppendEncoded(zipContent, "base64");
+            success = zipData.WriteFile(Directory.GetCurrentDirectory() + @"/File/out.zip");
+
+
+
+
+
+            FileStream fs = new FileStream("./File/out.zip", FileMode.Open);
+            ZipArchive zipArchive = new ZipArchive(fs);
+            string destination = Directory.GetCurrentDirectory() + @"/File/";
+            zipArchive.ExtractToDirectory(destination);
+            ViewBag.Message = "Selected SS Name: " + zipContent;
+            //  ViewBag.Message = "Selected GMI Name: " + search;
+
+            //Above works, need smth to read xml
+
+
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load(Directory.GetCurrentDirectory() + "/File/SIMC_Urzedowy_zmiany_" + pastDate + "_" + presentDate + ".xml");
+            var xList = doc.SelectNodes("/zmiany/zmiana"); // Znajdź węzeł zmiany, w której znajdują się informacje dot. modernizacji
+            foreach (XmlNode xNode in xList)
+            {
+                var xTypKorekty = xNode.SelectSingleNode("TypKorekty");
+                switch (xTypKorekty.InnerText)
+                {
+                    //Dodanie jednostki administracyjnej
+                    case "D": //**********************************************ADD ALL IMPORTANT SIMC STUFFF**********************************************
+                        string xSym = (xNode.SelectSingleNode("Identyfikator").InnerText);
+                        string xWojPo = (xNode.SelectSingleNode("WojPo").InnerText);
+                        string xPowPo = (xNode.SelectSingleNode("PowPo").InnerText);
+                        string xGmiPo = (xNode.SelectSingleNode("GmiPo").InnerText);
+                        string xRodzPo = (xNode.SelectSingleNode("RodzPo").InnerText);
+                        string xNazwaPo = xNode.SelectSingleNode("NazwaPo").InnerText;
+
+                        string xRmPo = (xNode.SelectSingleNode("RodzajMiejscowosciPo").InnerText);
+                        string xCzyNazwaZwyczajowaPo = (xNode.SelectSingleNode("CzyNazwaZwyczajowaPo").InnerText);
+                        string xSympodPo = xNode.SelectSingleNode("IdentyfikatorMiejscowosciPodstawowejPo").InnerText;
+                        string xStanPo = (xNode.SelectSingleNode("StanPo").InnerText);
+
+
+                        var queryCheck = (from toj in SimcObjList where toj.SYM == xSym select toj).FirstOrDefault();
+
+                        if (queryCheck != null)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                var queryAdd = addJA(xWojPo, xPowPo, xGmiPo, xRodzPo, xNazwaPo, xRmPo, xCzyNazwaZwyczajowaPo, xSympodPo, xStanPo);
+
+                                break;
+
+                            }
+                      
+
+
+
+                    //Delete old Jednostka Administracyjna
+                    case "U":
+
+                        string xSymPo = xNode.SelectSingleNode("Identyfikator").InnerText;
+
+
+
+                        var query = (from toj in SimcObjList where toj.SYM == xSymPo  select toj).FirstOrDefault();
+
+                        //check if value was not changed before
+                        if (query == null)
+                            break;
+
+                        _unitOfWork.Simc.Remove(query);
+                        _unitOfWork.Save();
+
+                        break;
+
+                    default:
+                        break;
+
+
+                    //Update current Jednostka Administracyjne
+                    //Modificate this method to work as in TERC, but for SIMC
+                    case "Z":
+
+
+
+
+                        xWojPo = handleNull((xNode.SelectSingleNode("WojPo").InnerText), xWojPrzed);
+                        xPowPo = handleNull((xNode.SelectSingleNode("PowPo").InnerText), xPowPrzed);
+
+                        xGmiPo = handleNull((xNode.SelectSingleNode("GmiPo").InnerText), xGmiPrzed);
+                        xRodzPo = handleNull((xNode.SelectSingleNode("RodzPo").InnerText), xRodzPrzed);
+                        xNazwaPo = handleNull(xNode.SelectSingleNode("NazwaPo").InnerText, xNazwaPrzed);
+                        xNazwaDodatkowaPo = handleNull(xNode.SelectSingleNode("NazwaDodatkowaPo").InnerText, xNazwaDodatkowaPrzed);
+                        xStanPo = (xNode.SelectSingleNode("StanPo").InnerText);
+
+
+                        // etc
+
+                        // Jak zrobić żeby ignorował wartości NULL ??
+
+                        //How to use string as requirement?
+                        if (xNazwaDodatkowaPrzed.StartsWith("gmina") || xNazwaDodatkowaPrzed.Contains("miasto"))
+                        {
+                            var query = (from toj in SimcObjList where toj.SYM == xSymPo select toj).FirstOrDefault();
+
+                            //check if value was not changed before
+                            if (query == null)
+                                break;
+
+                            query.WOJ = xWojPo;
+                            query.POW = xPowPo;
+                            query.GMI = xGmiPo;
+                            query.RODZ = xRodzPo;
+                            query.NAZWA = xNazwaPo;
+                            query.NAZWA_DOD = xNazwaDodatkowaPo;
+                            query.STAN_NA = xStanPo;
+
+                            _unitOfWork.Terc.Update(query);
+                        }
+                        else if (xNazwaDodatkowaPrzed.StartsWith("powiat"))
+                        {
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.POW == xPowPrzed && toj.NAZWA == xNazwaPrzed select toj).FirstOrDefault();
+
+                            //check if value was not changed before
+                            if (query == null)
+                                break;
+
+                            query.WOJ = xWojPo;
+                            query.POW = xPowPo;
+                            query.NAZWA = xNazwaPo;
+                            query.NAZWA_DOD = xNazwaDodatkowaPo;
+                            query.STAN_NA = xStanPo;
+
+                            _unitOfWork.Terc.Update(query);
+                        }
+                        else if (xNazwaDodatkowaPrzed.StartsWith("województwo"))
+                        {
+
+                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.NAZWA == xNazwaPrzed select toj).FirstOrDefault();
+                            //check if value was not changed before
+                            if (query == null)
+                                break;
+
+                            query.WOJ = xWojPo;
+
+                            query.NAZWA = xNazwaPo;
+                            query.NAZWA_DOD = xNazwaDodatkowaPo;
+                            query.STAN_NA = xStanPo;
+
+                            _unitOfWork.Terc.Update(query);
+
+                        }
+
+                        _unitOfWork.Save();
+                        break;
+
+
+                        //WORKS, now polishing this little boy!!!
+
+                }
+
+                // wezły
+
+
+            }
+
+
+
+
+
+        }
+
+
+
     }
 }
