@@ -171,7 +171,7 @@ namespace LogisticHelper.Controllers
         }
 
 
-        Simc addJA(string xWoj, string xPow, string xGmi, string xRodz, string xNazwa, string xRm, string xNz, string xSympod, string xStan)
+        Simc addJA(string xWoj, string xPow, string xGmi, string xRodz,string xRm, string xNz, string xNazwa, string xSym, string xSympod, string xStan)
         {
             var additionQuery = new Simc
             {
@@ -189,6 +189,13 @@ namespace LogisticHelper.Controllers
             _unitOfWork.Simc.Add(additionQuery);
             _unitOfWork.Save();
             return additionQuery;
+        }
+        string handleNull(string xAfter, string xBefore)
+        {
+            if (xAfter == "")
+                xAfter = xBefore;
+            return xAfter;
+
         }
 
 
@@ -250,6 +257,8 @@ namespace LogisticHelper.Controllers
                 var xTypKorekty = xNode.SelectSingleNode("TypKorekty");
                 switch (xTypKorekty.InnerText)
                 {
+
+
                     //Dodanie jednostki administracyjnej
                     case "D": //**********************************************ADD ALL IMPORTANT SIMC STUFFF**********************************************
                         string xSym = (xNode.SelectSingleNode("Identyfikator").InnerText);
@@ -268,18 +277,18 @@ namespace LogisticHelper.Controllers
                         var queryCheck = (from toj in SimcObjList where toj.SYM == xSym select toj).FirstOrDefault();
 
                         if (queryCheck != null)
-                            {
-                                break;
-                            }
-                            else
-                            {
+                        {
+                            break;
+                        }
+                        else
+                        {
 
-                                var queryAdd = addJA(xWojPo, xPowPo, xGmiPo, xRodzPo, xNazwaPo, xRmPo, xCzyNazwaZwyczajowaPo, xSympodPo, xStanPo);
+                            var queryAdd = addJA(xWojPo, xPowPo, xGmiPo, xRodzPo, xRmPo, xCzyNazwaZwyczajowaPo, xNazwaPo, xSym, xSympodPo, xStanPo);
+                            // string xWoj, string xPow, string xGmi, string xRodz,string xRm, string xNz, string xNazwa, string xSym, string xSympod, string xStan
+                            break;
 
-                                break;
+                        }
 
-                            }
-                      
 
 
 
@@ -290,7 +299,7 @@ namespace LogisticHelper.Controllers
 
 
 
-                        var query = (from toj in SimcObjList where toj.SYM == xSymPo  select toj).FirstOrDefault();
+                        var query = (from toj in SimcObjList where toj.SYM == xSymPo select toj).FirstOrDefault();
 
                         //check if value was not changed before
                         if (query == null)
@@ -309,88 +318,146 @@ namespace LogisticHelper.Controllers
                     //Modificate this method to work as in TERC, but for SIMC
                     case "Z":
 
+                         //After change nodes
+                        string xIdentyfikator = (xNode.SelectSingleNode("Identyfikator").InnerText);
+
+                        string xWojPrzed = (xNode.SelectSingleNode("WojPrzed ").InnerText);
+                        string xPowPrzed = (xNode.SelectSingleNode("PowPrzed ").InnerText);
+                        string xGmiPrzed = (xNode.SelectSingleNode("GmiPrzed ").InnerText);
+                        string xRodzPrzed = (xNode.SelectSingleNode("RodzPrzed ").InnerText);
+                        string xNazwaPrzed = xNode.SelectSingleNode("NazwaPrzed ").InnerText;
+
+                        string xRmPrzed = (xNode.SelectSingleNode("RodzajMiejscowosciPrzed ").InnerText);
+                        string xCzyNazwaZwyczajowaPrzed = (xNode.SelectSingleNode("CzyNazwaZwyczajowaPrzed ").InnerText);
+                        string xSympodPrzed = xNode.SelectSingleNode("IdentyfikatorMiejscowosciPodstawowejPrzed ").InnerText;
+                        string xStanPrzed = (xNode.SelectSingleNode("StanPrzed ").InnerText);
+
+
 
 
 
                         xWojPo = handleNull((xNode.SelectSingleNode("WojPo").InnerText), xWojPrzed);
                         xPowPo = handleNull((xNode.SelectSingleNode("PowPo").InnerText), xPowPrzed);
-
                         xGmiPo = handleNull((xNode.SelectSingleNode("GmiPo").InnerText), xGmiPrzed);
                         xRodzPo = handleNull((xNode.SelectSingleNode("RodzPo").InnerText), xRodzPrzed);
                         xNazwaPo = handleNull(xNode.SelectSingleNode("NazwaPo").InnerText, xNazwaPrzed);
-                        xNazwaDodatkowaPo = handleNull(xNode.SelectSingleNode("NazwaDodatkowaPo").InnerText, xNazwaDodatkowaPrzed);
-                        xStanPo = (xNode.SelectSingleNode("StanPo").InnerText);
+
+                        xRmPo = handleNull((xNode.SelectSingleNode("RodzajMiejscowosciPo").InnerText), xRmPrzed);
+                        xCzyNazwaZwyczajowaPo = handleNull((xNode.SelectSingleNode("CzyNazwaZwyczajowaPo").InnerText), xCzyNazwaZwyczajowaPrzed);
+                        xSympodPo = handleNull(xNode.SelectSingleNode("IdentyfikatorMiejscowosciPodstawowejPo").InnerText, xSympodPrzed);
+                        xStanPo = handleNull((xNode.SelectSingleNode("StanPo").InnerText), xStanPrzed);
+
+
 
 
                         // etc
 
                         // Jak zrobić żeby ignorował wartości NULL ??
 
-                        //How to use string as requirement?
-                        if (xNazwaDodatkowaPrzed.StartsWith("gmina") || xNazwaDodatkowaPrzed.Contains("miasto"))
+
+
+                        var queryZ = (from toj in SimcObjList where toj.SYM == xIdentyfikator select toj).FirstOrDefault();
+
+                        //check if value was not changed before
+                        if (queryZ == null)
+                            break;
+                        else
                         {
-                            var query = (from toj in SimcObjList where toj.SYM == xSymPo select toj).FirstOrDefault();
-
-                            //check if value was not changed before
-                            if (query == null)
-                                break;
-
-                            query.WOJ = xWojPo;
-                            query.POW = xPowPo;
-                            query.GMI = xGmiPo;
-                            query.RODZ = xRodzPo;
-                            query.NAZWA = xNazwaPo;
-                            query.NAZWA_DOD = xNazwaDodatkowaPo;
-                            query.STAN_NA = xStanPo;
-
-                            _unitOfWork.Terc.Update(query);
+                            queryZ.WOJ = xWojPo;
+                            queryZ.POW = xPowPo;
+                            queryZ.GMI = xGmiPo;
+                            queryZ.RODZ_GMI = xRodzPo;
+                            queryZ.RM = xRmPo;
+                            queryZ.MZ = xCzyNazwaZwyczajowaPo;
+                            queryZ.NAZWA = xNazwaPo;
+                            queryZ.SYM = xIdentyfikator;
+                            queryZ.SYMPOD = xSympodPo;
+                            queryZ.STAN_NA = xStanPo;
                         }
-                        else if (xNazwaDodatkowaPrzed.StartsWith("powiat"))
-                        {
-                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.POW == xPowPrzed && toj.NAZWA == xNazwaPrzed select toj).FirstOrDefault();
 
-                            //check if value was not changed before
-                            if (query == null)
-                                break;
 
-                            query.WOJ = xWojPo;
-                            query.POW = xPowPo;
-                            query.NAZWA = xNazwaPo;
-                            query.NAZWA_DOD = xNazwaDodatkowaPo;
-                            query.STAN_NA = xStanPo;
 
-                            _unitOfWork.Terc.Update(query);
-                        }
-                        else if (xNazwaDodatkowaPrzed.StartsWith("województwo"))
-                        {
 
-                            query = (from toj in TercObjList where toj.WOJ == xWojPrzed && toj.NAZWA == xNazwaPrzed select toj).FirstOrDefault();
-                            //check if value was not changed before
-                            if (query == null)
-                                break;
+                        _unitOfWork.Simc.Update(queryZ);
 
-                            query.WOJ = xWojPo;
-
-                            query.NAZWA = xNazwaPo;
-                            query.NAZWA_DOD = xNazwaDodatkowaPo;
-                            query.STAN_NA = xStanPo;
-
-                            _unitOfWork.Terc.Update(query);
-
-                        }
 
                         _unitOfWork.Save();
                         break;
 
 
-                        //WORKS, now polishing this little boy!!!
+                    //WORKS, now polishing this little boy!!!
 
+
+                    case "P":
+
+                        //After change nodes
+                         xIdentyfikator = (xNode.SelectSingleNode("Identyfikator").InnerText);
+
+                         xWojPrzed = (xNode.SelectSingleNode("WojPrzed ").InnerText);
+                         xPowPrzed = (xNode.SelectSingleNode("PowPrzed ").InnerText);
+                         xGmiPrzed = (xNode.SelectSingleNode("GmiPrzed ").InnerText);
+                         xRodzPrzed = (xNode.SelectSingleNode("RodzPrzed ").InnerText);
+                         xNazwaPrzed = xNode.SelectSingleNode("NazwaPrzed ").InnerText;
+
+                      
+                         xStanPrzed = (xNode.SelectSingleNode("StanPrzed ").InnerText);
+
+
+
+
+
+                        xWojPo = handleNull((xNode.SelectSingleNode("WojPo").InnerText), xWojPrzed);
+                        xPowPo = handleNull((xNode.SelectSingleNode("PowPo").InnerText), xPowPrzed);
+                        xGmiPo = handleNull((xNode.SelectSingleNode("GmiPo").InnerText), xGmiPrzed);
+                        xRodzPo = handleNull((xNode.SelectSingleNode("RodzPo").InnerText), xRodzPrzed);
+                        xNazwaPo = handleNull(xNode.SelectSingleNode("NazwaPo").InnerText, xNazwaPrzed);
+
+                       
+                        xStanPo = handleNull((xNode.SelectSingleNode("StanPo").InnerText), xStanPrzed);
+
+
+
+
+                        // etc
+
+                        // Jak zrobić żeby ignorował wartości NULL ??
+
+
+
+                        var queryP = (from toj in SimcObjList where toj.SYM == xIdentyfikator select toj).FirstOrDefault();
+
+                        //check if value was not changed before
+                        if (queryP == null)
+                            break;
+                        else
+                        {
+                            queryP.WOJ = xWojPo;
+                            queryP.POW = xPowPo;
+                            queryP.GMI = xGmiPo;
+                            queryP.RODZ_GMI = xRodzPo;
+
+                            queryP.NAZWA = xNazwaPo;
+                            queryP.SYM = xIdentyfikator;
+                            
+                        }
+
+
+
+
+                        _unitOfWork.Simc.Update(queryP);
+
+
+                        _unitOfWork.Save();
+                        break;
                 }
 
-                // wezły
-
+                //WORKS, now polishing this little boy!!!
 
             }
+            // wezły
+
+
+        }
 
 
 
@@ -401,4 +468,3 @@ namespace LogisticHelper.Controllers
 
 
     }
-}

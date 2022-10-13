@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "d/1bBDpax+tk34gnC+Ly8VGAjvMOlS/BS+Qt6GnkYuI=",
+  "Hash": "63/vhhoxnxE9jlnCvgeUIcG3raF2KpvpdnsjagSGR+o=",
   "Source": "LogisticHelper",
   "BasePath": "_content/LogisticHelper",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\LogisticHelper.bundle.scp.css"
+    },
+    {
+      "Identity": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\wwwroot\\css\\Original.css",
+      "SourceId": "LogisticHelper",
+      "SourceType": "Discovered",
+      "ContentRoot": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\wwwroot\\",
+      "BasePath": "_content/LogisticHelper",
+      "RelativePath": "css/Original.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Original.css"
     },
     {
       "Identity": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\Logistic-Helper\\wwwroot\\css\\site.css",
