@@ -95,6 +95,13 @@ namespace LogisticHelper.Controllers
             string jsson = JsonConvert.SerializeObject(search);
             return jsson;
         }
+
+  
+         
+
+
+
+         
         public IActionResult Found()
         {
            
@@ -153,8 +160,12 @@ namespace LogisticHelper.Controllers
 
         //Why symbol == null?
         //GET /Details/sym
-        [HttpGet]
-        public IActionResult Details(string? symbol, string? wojewodztwo)
+        public IActionResult Details()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> DetailsAsync(string? symbol, string? wojewodztwo)
         {
             if (symbol == null )
             {
@@ -166,8 +177,22 @@ namespace LogisticHelper.Controllers
             {
                 return NotFound();
             }
-            Schedule();
-            return View(getCityToSend);
+
+
+
+         
+            //Update SIMC table
+            //Schedule();
+
+            //Get place, we will be searching 4 street
+            TerytWs1Client client = connection();
+            List<UlicaDrzewo[]> streets = new List<UlicaDrzewo[]>();
+             
+            IEnumerable<UlicaDrzewo> streetss =  await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now);
+            
+
+
+            return View(streetss);
         }
 
 
