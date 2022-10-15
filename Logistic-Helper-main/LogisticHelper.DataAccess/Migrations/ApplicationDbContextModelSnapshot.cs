@@ -22,6 +22,47 @@ namespace LogisticHelper.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("LogisticHelper.Models.Simc", b =>
+                {
+                    b.Property<string>("SYM")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GMI")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MZ")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NAZWA")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("POW")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RM")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RODZ_GMI")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("STAN_NA")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SYMPOD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WOJ")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SYM");
+
+                    b.ToTable("Simcs");
+                });
+
             modelBuilder.Entity("LogisticHelper.Models.Terc", b =>
                 {
                     b.Property<int>("ID_TERC")

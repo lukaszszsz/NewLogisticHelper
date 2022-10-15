@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Search";
+}
+<div id = "koza" style = "width:100px; height:100px;">
+    </div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+@using (Html.BeginForm("Found", "Simc", FormMethod.Post))
+{
+    <input type="text" id="textGmi" name="search" />
+  
+    <br />
+    <input type="submit" id="btnSubmit" value="Submit" />
+    <br />
+    <br />
+    @ViewBag.Message
+}
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#textGmi").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Simc/AutoComplete/',
+                        type: "POST",
+                        dataType:"json",
+                        data: { "input": request.term },
+
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                 return { 
+                                     
+                                     label:item.label,
+                                     val:item.val,
+                                     
+                                     woj:item.woj, 
+                                     pow:item.pow, 
+                                     gmi:item.gmi,
+                                     rodz_gmi:item.rodz_gmi,
+                                     rm:item.rm,
+                                     mz:item.mz,
+                                     nazwa:item.nazwa,
+                                     sym:item.sym,
+                                     sympod:item.sympod,
+                                     stan_na:item.stan_na
+                                     
+                                    };
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                 //  get selected value
+                    $("#koza").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+    </script>
+    }
+
+   
+
+@*
+<form>
+  <div class="form-group">
+    <label for="GMIFORM">Podaj Gminę</label>
+    <input type="text" class="form-control" id="GMI" placeholder="Podaj Gminę">
+
+  </div>
+  <div class="form-group">
+    <label for="POW">Jaki Powiat</label>
+    <input type="text" class="form-control" id="POW" placeholder="POW">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Szukaj</button>
+</form>*@
+
