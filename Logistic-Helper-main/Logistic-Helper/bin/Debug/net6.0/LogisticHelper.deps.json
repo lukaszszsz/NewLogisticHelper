@@ -2165,12 +2165,9 @@
       "LogisticHelper.DataAccess/1.0.0": {
         "dependencies": {
           "ChilkatDnCore": "9.5.0.90",
-          "FluentScheduler": "5.5.1",
           "LogisticHelper.Models": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.0-preview.4.22229.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0-preview.4.22229.2",
-          "Newtonsoft.Json": "13.0.2-beta2",
-          "Quartz": "3.5.0",
           "System.IO.Compression.ZipFile": "4.3.0",
           "jQuery.UI.Combined": "1.13.1"
         },
