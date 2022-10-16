@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {}
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {}
   },
   "projects": {
-    "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {
+    "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
+        "projectUniqueName": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
         "projectName": "LogisticHelper.Utility",
-        "projectPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
+        "projectPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
         "packagesPath": "C:\\Users\\MK\\.nuget\\packages\\",
-        "outputPath": "G:\\Rzeczy_Programowanie\\PI2023\\Inynier\\Inzynierka\\PI2023\\NewLogistic\\WCF\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\obj\\",
+        "outputPath": "N:\\Programowanie\\Inzynierka\\PI2023\\NewLogistic\\NewLogisticHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "P:\\Visual\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\MK\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
