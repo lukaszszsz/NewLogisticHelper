@@ -50,3 +50,4 @@ G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogi
 G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.pdb
 G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.genruntimeconfig.cache
 G:\Rzeczy_Programowanie\PI2023\Inynier\Inzynierka\PI2023\NewLogistic\WCF\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\ref\LogisticHelper.Models.dll
+N:\Programowanie\Inzynierka\PI2023\NewLogistic\NewLogisticHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.csproj.AssemblyReference.cache

@@ -12,6 +12,7 @@ namespace LogisticHelper.Repository
             User = new UserRepository(_db);
             Terc = new TercRepository(_db);
             Simc = new SimcRepository(_db);
+            Ulic = new UlicRepository(_db);
         }
 
         public IUserRepository User
@@ -19,7 +20,13 @@ namespace LogisticHelper.Repository
         public ITercRepository Terc
         { get; private set; } 
         public ISimcRepository Simc
+        { get; private set; } 
+        public IUlicRepository Ulic
         { get; private set; }
+
+        
+
+      
 
         public void Save()
         {
