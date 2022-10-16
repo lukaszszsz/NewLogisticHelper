@@ -160,11 +160,8 @@ namespace LogisticHelper.Controllers
 
         //Why symbol == null?
         //GET /Details/sym
-        public IActionResult Details()
-        {
-            return View();
-        }
-        [HttpPost]
+        
+    
         public async Task<IActionResult> DetailsAsync(string? symbol, string? wojewodztwo)
         {
             if (symbol == null )
@@ -188,11 +185,11 @@ namespace LogisticHelper.Controllers
             TerytWs1Client client = connection();
             List<UlicaDrzewo[]> streets = new List<UlicaDrzewo[]>();
              
-            IEnumerable<UlicaDrzewo> streetss =  await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now);
+             streets.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
+            TempData["streets"] = streets;
+
+            return RedirectToAction("Index", "Ulic");
             
-
-
-            return View(streetss);
         }
 
 

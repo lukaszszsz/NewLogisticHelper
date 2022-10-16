@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServiceReference1;
 
 namespace LogisticHelper.Controllers
 {
@@ -8,8 +9,10 @@ namespace LogisticHelper.Controllers
         // GET: UlicController
         public ActionResult Index()
         {
-            return View();
-        }
+            var streets = TempData["streets"] as List<UlicaDrzewo>;
+            return View(streets);
+        } 
+       
 
         // GET: UlicController/Details/5
         public ActionResult Details(int id)
