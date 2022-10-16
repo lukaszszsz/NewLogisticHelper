@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mariu\\Documents\\Gi'][\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {}
+    "C:\\Users\\mariu\\Documents\\GitHub\\LogicHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mariu\\Documents\\Gi'][\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {
+    "C:\\Users\\mariu\\Documents\\GitHub\\LogicHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mariu\\Documents\\Gi'][\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
+        "projectUniqueName": "C:\\Users\\mariu\\Documents\\GitHub\\LogicHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
         "projectName": "LogisticHelper.Utility",
-        "projectPath": "C:\\Users\\mariu\\Documents\\Gi'][\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
+        "projectPath": "C:\\Users\\mariu\\Documents\\GitHub\\LogicHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\LogisticHelper.Utility.csproj",
         "packagesPath": "C:\\Users\\mariu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mariu\\Documents\\Gi'][\\Logistic-Helper-main\\LogisticHelper.Utility\\obj\\",
+        "outputPath": "C:\\Users\\mariu\\Documents\\GitHub\\LogicHelper\\Logistic-Helper-main\\LogisticHelper.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

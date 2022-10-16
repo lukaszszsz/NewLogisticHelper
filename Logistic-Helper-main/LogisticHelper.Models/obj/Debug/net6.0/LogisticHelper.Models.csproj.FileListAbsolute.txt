@@ -64,3 +64,17 @@ C:\Users\mariu\Documents\Gi'][\Logistic-Helper-main\LogisticHelper.Models\obj\De
 C:\Users\mariu\Documents\Gi'][\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.pdb
 C:\Users\mariu\Documents\Gi'][\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.genruntimeconfig.cache
 C:\Users\mariu\Documents\Gi'][\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\ref\LogisticHelper.Models.dll
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.deps.json
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.runtimeconfig.json
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.dll
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\bin\Debug\net6.0\LogisticHelper.Models.pdb
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.csproj.AssemblyReference.cache
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.AssemblyInfoInputs.cache
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.AssemblyInfo.cs
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.csproj.CoreCompileInputs.cache
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.dll
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\refint\LogisticHelper.Models.dll
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.pdb
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\LogisticHelper.Models.genruntimeconfig.cache
+C:\Users\mariu\Documents\GitHub\LogicHelper\Logistic-Helper-main\LogisticHelper.Models\obj\Debug\net6.0\ref\LogisticHelper.Models.dll
