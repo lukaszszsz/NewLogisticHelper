@@ -34,9 +34,69 @@
                     </p>
         }
 
+ @*       
+table class="table table-bordered table-stripped" style= "width:100%;">
+    <thead>
+        <tr>
+            <th>
+               ID
+            </th>
+            <th>
+                LAST_NAME
+            </th>
+               <th>
+               NAME
+            </th>
+            <th>
+                Data Urodzenia
+            </th>
+               <th>
+               Mail
+            </th>
+            <th>
+                PHONE
+            </th>
+            <th>
+                Edit
+            </th>
+              <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+        var Modell = ViewData["streets"];
+        }
+        Loop to get data from database
+        @foreach(var obj in Modell)
+        {
+            <tr>
+                <td width= "10%">
+                    @obj.WOJ
+                </td>
 
+                <td width= "10%">
+                    @obj.POW
+                </td>
+            
+            
+                <td width= "10%">
+                    @obj.GMI
+
+                </td>
+                 <td width= "10%">
+                    @obj.STAN_NA
+
+                </td>
+          </tr>
+        }
+    </tbody>
+
+
+</table>
        
-@*
+
 <form>
   <div class="form-group">
     <label for="GMIFORM">Podaj Gminę</label>

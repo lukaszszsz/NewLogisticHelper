@@ -12,8 +12,8 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-
-
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using LogisticHelper.Classes;
 
 namespace LogisticHelper.Controllers
 {
@@ -22,29 +22,7 @@ namespace LogisticHelper.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
 
-
-
-        public SimcController(IUnitOfWork unitOfWork)
-        {
-
-            _unitOfWork = unitOfWork;
-        }
-
-        public IActionResult Index()
-        {
-            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
-            return View(objSimcList);
-        }
-
-        public IActionResult Search()
-        {
-
-            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
-            
-
-
-            return View(objSimcList);
-        }
+       
         public TerytWs1Client connection()
         {
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
@@ -96,6 +74,29 @@ namespace LogisticHelper.Controllers
             return jsson;
         }
 
+
+        public SimcController(IUnitOfWork unitOfWork)
+        {
+
+            _unitOfWork = unitOfWork;
+        }
+
+        public IActionResult Index()
+        {
+            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            return View(objSimcList);
+        }
+
+        public IActionResult Search()
+        {
+
+            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            
+
+
+            return View(objSimcList);
+        }
+      
   
          
 
@@ -162,34 +163,36 @@ namespace LogisticHelper.Controllers
         //GET /Details/sym
         
     
-        public async Task<IActionResult> DetailsAsync(string? symbol, string? wojewodztwo)
+        public async Task<Simc> DetailsAsync(string symbol, string wojewodztwo)
         {
-            if (symbol == null )
-            {
-                return NotFound();
-            }
+           
             
-            var getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
-            if (getCityToSend == null)
-            {
-                return NotFound();
-            }
+            Simc getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
+           
+            TerytWs1Client client = connection();
+
+            IEnumerable<UlicaDrzewo>city =  await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now);
 
 
-
-         
             //Update SIMC table
             //Schedule();
 
-            //Get place, we will be searching 4 street
-            TerytWs1Client client = connection();
-            List<UlicaDrzewo[]> streets = new List<UlicaDrzewo[]>();
-             
-             streets.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
-            TempData["streets"] = streets;
 
-            return RedirectToAction("Index", "Ulic");
-            
+            //Get place, we will be searching 4 street
+
+
+
+
+            return getCityToSend;
+
+
+
+        }
+        public IActionResult City()
+        {
+            var dd = DetailsAsync();
+
+            return View();
         }
 
 

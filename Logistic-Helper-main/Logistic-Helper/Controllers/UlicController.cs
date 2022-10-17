@@ -1,16 +1,41 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LogisticHelper.Classes;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ServiceReference1;
 
 namespace LogisticHelper.Controllers
 {
     public class UlicController : Controller
     {
-        // GET: UlicController
-        public ActionResult Index()
+        public TerytWs1Client connection()
         {
-            var streets = TempData["streets"] as List<UlicaDrzewo>;
-            return View(streets);
+            ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
+            /*  serviceteryt.TerytWs1Client client = new serviceteryt.TerytWs1Client();*/
+
+
+            client.ClientCredentials.UserName.UserName = "Mariusz.Sobota";
+            client.ClientCredentials.UserName.Password = "so6QT8ahG";
+            client.OpenAsync().Wait();
+            return client;
+        }
+        // GET: UlicController
+        public async Task<ActionResult> IndexAsync()
+        {
+
+            List<string> city = TempData["city"] as List<string>;
+            TerytWs1Client client = connection();
+                 List<UlicaDrzewo[]> streets = new List<UlicaDrzewo[]>();
+
+                 // streets.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(city, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
+            
+            //List<UlicaDrzewo> streets = new List<UlicaDrzewo>();
+            
+
+            
+           
+          
+            return View();
         } 
        
 
@@ -33,7 +58,7 @@ namespace LogisticHelper.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -54,7 +79,7 @@ namespace LogisticHelper.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -75,7 +100,7 @@ namespace LogisticHelper.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {

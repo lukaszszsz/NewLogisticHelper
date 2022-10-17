@@ -81,6 +81,10 @@
               "target": "Package",
               "version": "[7.11.0, )"
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.15.1, )"
@@ -92,6 +96,10 @@
             "Quartz": {
               "target": "Package",
               "version": "[3.5.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.0, )"
             },
             "System.IO.Compression.ZipFile": {
               "target": "Package",
