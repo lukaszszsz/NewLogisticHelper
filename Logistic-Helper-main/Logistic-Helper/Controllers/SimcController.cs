@@ -163,17 +163,42 @@ namespace LogisticHelper.Controllers
         //GET /Details/sym
         
     
-        public async Task<Simc> DetailsAsync(string symbol, string wojewodztwo)
+        public async Task<IActionResult> DetailsAsync(string symbol, string wojewodztwo)
         {
-           
-            
+            if (symbol == null )
+            {
+                return NotFound();
+            }
+
             Simc getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
-           
+            List <UlicaDrzewo[]> city = new List<UlicaDrzewo[]>();
+            //city.Add(getCityToSend);
+            if (getCityToSend == null)
+            {
+                return NotFound();
+            }
             TerytWs1Client client = connection();
 
-            IEnumerable<UlicaDrzewo>city =  await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now);
+            //How send THIS, to ULIC?
+             city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
+            List<UlicaDrzewo> streets = new List<UlicaDrzewo>();  
+            foreach (var st in city)
+            {
+                for (int i = 0; i < st.Length; i++)
+                {
+                    streets.Add(st[i]);
 
+                }
+                
+            }
+            List<string> name = new List<string>();
 
+            foreach (var st in streets)
+            {
+                name.Add(st.NazwaCechy + st.Nazwa2 + st.Nazwa1);
+            }
+
+            TempData.Put("name", name);
             //Update SIMC table
             //Schedule();
 
@@ -183,14 +208,14 @@ namespace LogisticHelper.Controllers
 
 
 
-            return getCityToSend;
-
-
+            //TempData.Add("city", city);
+            return RedirectToAction ("Index", "Ulic");
+                
 
         }
         public IActionResult City()
         {
-            var dd = DetailsAsync();
+
 
             return View();
         }
