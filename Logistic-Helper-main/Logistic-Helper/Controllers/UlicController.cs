@@ -20,21 +20,12 @@ namespace LogisticHelper.Controllers
             return client;
         }
         // GET: UlicController
-        public ActionResult Index()
+        public ActionResult Index(List<UlicaDrzewo> streetsList)
         {
-
-            var city = TempData.Get<string>("name");
             
 
-                 // streets.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(city, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
-            
-            //List<UlicaDrzewo> streets = new List<UlicaDrzewo>();
-            
 
-            
-           
-          
-            return View();
+            return View(streetsList);
         } 
        
 

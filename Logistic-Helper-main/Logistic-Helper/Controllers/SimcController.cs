@@ -163,12 +163,19 @@ namespace LogisticHelper.Controllers
         //GET /Details/sym
         
     
-        public async Task<IActionResult> DetailsAsync(string symbol, string wojewodztwo)
+        public async Task<IActionResult> DetailsAsync(string symbol, string wojewodztwo,string powiat, string nazwaMiejscowosci)
         {
+            TerytWs1Client client = connection();
+
             if (symbol == null )
             {
                 return NotFound();
             }
+            List<Miejscowosc[]> administrativeUnits = new List<Miejscowosc[]>();  
+            administrativeUnits.Add(await client.WyszukajMiejscowoscAsync(nazwaMiejscowosci, symbol)); // <---- Za każdym razem, tworzy się tutaj obiekt Miejscowość, teraz trzeba ją wyrucić na ekran
+
+          
+
 
             Simc getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
             List <UlicaDrzewo[]> city = new List<UlicaDrzewo[]>();
@@ -177,7 +184,6 @@ namespace LogisticHelper.Controllers
             {
                 return NotFound();
             }
-            TerytWs1Client client = connection();
 
             //How send THIS, to ULIC?
              city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
@@ -191,25 +197,10 @@ namespace LogisticHelper.Controllers
                 }
                 
             }
-            List<string> name = new List<string>();
+          
 
-            foreach (var st in streets)
-            {
-                name.Add(st.NazwaCechy + st.Nazwa2 + st.Nazwa1);
-            }
-
-            TempData.Put("name", name);
-            //Update SIMC table
-            //Schedule();
-
-
-            //Get place, we will be searching 4 street
-
-
-
-
-            //TempData.Add("city", city);
-            return RedirectToAction ("Index", "Ulic");
+          
+            return RedirectToAction ("Index", "Ulic", new {streetsList = streets });
                 
 
         }
