@@ -161,33 +161,36 @@ namespace LogisticHelper.Controllers
 
         //Why symbol == null?
         //GET /Details/sym
-        
-    
-        public async Task<IActionResult> DetailsAsync(string symbol, string wojewodztwo,string powiat, string nazwaMiejscowosci)
+
+
+        public async Task<IActionResult> DetailsAsync(string symbol, string wojewodztwo, string powiat, string nazwaMiejscowosci)
         {
             TerytWs1Client client = connection();
 
-            if (symbol == null )
+            if (symbol == null)
             {
                 return NotFound();
             }
-            List<Miejscowosc[]> administrativeUnits = new List<Miejscowosc[]>();  
+            List<Miejscowosc[]> administrativeUnits = new List<Miejscowosc[]>();
             administrativeUnits.Add(await client.WyszukajMiejscowoscAsync(nazwaMiejscowosci, symbol)); // <---- Za każdym razem, tworzy się tutaj obiekt Miejscowość, teraz trzeba ją wyrucić na ekran
 
-          
+
 
 
             Simc getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
-            List <UlicaDrzewo[]> city = new List<UlicaDrzewo[]>();
+            List<UlicaDrzewo[]> city = new List<UlicaDrzewo[]>();
             //city.Add(getCityToSend);
             if (getCityToSend == null)
             {
                 return NotFound();
             }
 
+
+            //Przenieś to do kontrolera ULIC!!!
+
             //How send THIS, to ULIC?
-             city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
-            List<UlicaDrzewo> streets = new List<UlicaDrzewo>();  
+            city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
+            List<UlicaDrzewo> streets = new List<UlicaDrzewo>();
             foreach (var st in city)
             {
                 for (int i = 0; i < st.Length; i++)
@@ -195,12 +198,12 @@ namespace LogisticHelper.Controllers
                     streets.Add(st[i]);
 
                 }
-                
-            }
-          
 
+            }
+
+            
           
-            return RedirectToAction ("Index", "Ulic", new {streetsList = streets });
+            return RedirectToAction ("Index", "Ulic", streets);
                 
 
         }

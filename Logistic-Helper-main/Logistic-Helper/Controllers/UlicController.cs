@@ -20,12 +20,12 @@ namespace LogisticHelper.Controllers
             return client;
         }
         // GET: UlicController
-        public ActionResult Index(List<UlicaDrzewo> streetsList)
+        public ActionResult Index(List <UlicaDrzewo> streets)
         {
             
 
 
-            return View(streetsList);
+            return View(streets);
         } 
        
 
