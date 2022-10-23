@@ -188,8 +188,22 @@ namespace LogisticHelper.Controllers
 
             //Przenieś to do kontrolera ULIC!!!
 
-            //How send THIS, to ULIC?
-            city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
+            //Sending data about Administrative Unit, to show to human
+            TempData["wojewodztwo"] = wojewodztwo;
+            TempData["powiat"] = powiat;
+            TempData["nazwa"] = nazwaMiejscowosci;
+
+            //Sending temp data to get streets
+            TempData["WOJ"] = getCityToSend.WOJ;
+            TempData["POW"] = getCityToSend.POW;
+            TempData["GMI"] = getCityToSend.GMI;
+            TempData["RODZ"] = getCityToSend.RODZ_GMI;
+            TempData["SYM"] = getCityToSend.SYM;
+      
+          
+
+
+            //city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(, , , getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
             List<UlicaDrzewo> streets = new List<UlicaDrzewo>();
             foreach (var st in city)
             {

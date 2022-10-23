@@ -20,9 +20,28 @@ namespace LogisticHelper.Controllers
             return client;
         }
         // GET: UlicController
-        public ActionResult Index(List <UlicaDrzewo> streets)
+        public async Task<ActionResult> IndexAsync()
         {
+            TerytWs1Client client = connection();
+            string woj = TempData["WOJ"] as string;
+            string pow = TempData["POW"] as string;
+            string gmi = TempData["GMI"] as string;
+            string rodz = TempData["RODZ"] as string;
+            string sym = TempData["SYM"] as string;
+
             
+            List<UlicaDrzewo[]> city = new List<UlicaDrzewo[]>();
+            city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(woj,pow ,gmi ,rodz, sym, true, false, DateTime.Now));
+            List<UlicaDrzewo> streets = new List<UlicaDrzewo>();
+            foreach (var st in city)
+            {
+                for (int i = 0; i < st.Length; i++)
+                {
+                    streets.Add(st[i]);
+
+                }
+
+            }
 
 
             return View(streets);
@@ -48,7 +67,7 @@ namespace LogisticHelper.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -69,7 +88,7 @@ namespace LogisticHelper.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -90,7 +109,7 @@ namespace LogisticHelper.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {

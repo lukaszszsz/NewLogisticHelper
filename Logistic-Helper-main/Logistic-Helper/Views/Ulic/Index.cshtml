@@ -24,10 +24,11 @@
 
 @model List<UlicaDrzewo>
  
-    <div class="alert alert-danger alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" >x</button>
+    <div class="info bg-info">
+        <h2>@TempData["wojewodztwo"], @TempData["Powiat"], @TempData["nazwa"]</h2>
         @foreach(var streets in Model )
         {
+           
             <p>@streets.Nazwa1</p>
         }
     </div>
