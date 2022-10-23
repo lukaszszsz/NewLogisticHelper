@@ -12,8 +12,8 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-
-
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using LogisticHelper.Classes;
 
 namespace LogisticHelper.Controllers
 {
@@ -22,29 +22,7 @@ namespace LogisticHelper.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
 
-
-
-        public SimcController(IUnitOfWork unitOfWork)
-        {
-
-            _unitOfWork = unitOfWork;
-        }
-
-        public IActionResult Index()
-        {
-            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
-            return View(objSimcList);
-        }
-
-        public IActionResult Search()
-        {
-
-            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
-            
-
-
-            return View(objSimcList);
-        }
+       
         public TerytWs1Client connection()
         {
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
@@ -96,6 +74,29 @@ namespace LogisticHelper.Controllers
             return jsson;
         }
 
+
+        public SimcController(IUnitOfWork unitOfWork)
+        {
+
+            _unitOfWork = unitOfWork;
+        }
+
+        public IActionResult Index()
+        {
+            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            return View(objSimcList);
+        }
+
+        public IActionResult Search()
+        {
+
+            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            
+
+
+            return View(objSimcList);
+        }
+      
   
          
 
@@ -160,39 +161,71 @@ namespace LogisticHelper.Controllers
 
         //Why symbol == null?
         //GET /Details/sym
-        public IActionResult Details()
+
+
+        public async Task<IActionResult> DetailsAsync(string symbol, string wojewodztwo, string powiat, string nazwaMiejscowosci)
         {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> DetailsAsync(string? symbol, string? wojewodztwo)
-        {
-            if (symbol == null )
+            TerytWs1Client client = connection();
+
+            if (symbol == null)
             {
                 return NotFound();
             }
-            
-            var getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
+            List<Miejscowosc[]> administrativeUnits = new List<Miejscowosc[]>();
+            administrativeUnits.Add(await client.WyszukajMiejscowoscAsync(nazwaMiejscowosci, symbol)); // <---- Za każdym razem, tworzy się tutaj obiekt Miejscowość, teraz trzeba ją wyrucić na ekran
+
+
+
+
+            Simc getCityToSend = _unitOfWork.Simc.GetFirstOrDefault(u => u.SYM == symbol);
+            List<UlicaDrzewo[]> city = new List<UlicaDrzewo[]>();
+            //city.Add(getCityToSend);
             if (getCityToSend == null)
             {
                 return NotFound();
             }
 
 
+            //Przenieś to do kontrolera ULIC!!!
 
-         
-            //Update SIMC table
-            //Schedule();
+            //Sending data about Administrative Unit, to show to human
+            TempData["wojewodztwo"] = wojewodztwo;
+            TempData["powiat"] = powiat;
+            TempData["nazwa"] = nazwaMiejscowosci;
 
-            //Get place, we will be searching 4 street
-            TerytWs1Client client = connection();
-            List<UlicaDrzewo[]> streets = new List<UlicaDrzewo[]>();
-             
-            IEnumerable<UlicaDrzewo> streetss =  await client.PobierzListeUlicDlaMiejscowosciAsync(getCityToSend.WOJ, getCityToSend.POW, getCityToSend.GMI, getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now);
+            //Sending temp data to get streets
+            TempData["WOJ"] = getCityToSend.WOJ;
+            TempData["POW"] = getCityToSend.POW;
+            TempData["GMI"] = getCityToSend.GMI;
+            TempData["RODZ"] = getCityToSend.RODZ_GMI;
+            TempData["SYM"] = getCityToSend.SYM;
+      
+          
+
+
+            //city.Add(await client.PobierzListeUlicDlaMiejscowosciAsync(, , , getCityToSend.RODZ_GMI, getCityToSend.SYM, true, false, DateTime.Now));
+            List<UlicaDrzewo> streets = new List<UlicaDrzewo>();
+            foreach (var st in city)
+            {
+                for (int i = 0; i < st.Length; i++)
+                {
+                    streets.Add(st[i]);
+
+                }
+
+            }
+
             
+          
+            return RedirectToAction ("Index", "Ulic", streets);
+                
+
+        }
+        public IActionResult City()
+        {
 
 
-            return View(streetss);
+            return View();
         }
 
 

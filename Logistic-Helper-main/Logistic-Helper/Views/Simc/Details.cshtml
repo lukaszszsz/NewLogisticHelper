@@ -1,70 +1,89 @@
-﻿@{
-    @model Simc
-    
+﻿@model IEnumerable<LogisticHelper.Models.Simc>
 
-    ViewData["Title"] = "Details";
-}
-<div id = "koza" style = "width:100px; height:100px;">
-    </div>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
-
-Details
-        <form method = "post">
-    <div class = "border p-3 mt-4">
-        <div class = "row pb-2">
-            <h1 class = "text-primary">Delete User</h1>
-            <hr />
-        </div>
-
-
-
-<div class = "mb-3">
-            <label asp-for="WOJ">Wojewodztwo</label>
-            <input asp-for = "WOJ" class = "form-control"/>
-            <span asp-validation-for="WOJ" class= "text-danger"></span>
-        </div>
-             <div class = "mb-3">
-            <label asp-for="POW">Powiat</label>
-            <input asp-for = "POW" class = "form-control"/>
-            <span asp-validation-for="POW" class= "text-danger"></span>
-
-            <label asp-for="NAZWA">Nazwa</label>
-            <input asp-for = "NAZWA" type = "text" class = "form-control"/>
-            <span asp-validation-for="NAZWA" class= "text-danger"></span>
-
-           
-
-            <button type= "submit" class = "btn btn-primary" style = "width:150px">Delete</button>
-            <a asp-for="User" asp-action="Index" class = "btn btn-secondary" style ="width:150px">Back to List</a>
-        </div>
-    </div>
-
-</form>
-
-
-
-@section Scripts
-{
-    @{
-        <partial name = "_ValidationScriptsPartial"/>
-    }
-
+@{
+    ViewData["Title"] = "DetailsAsync";
 }
 
+<h1>DetailsAsync</h1>
 
-
-@*
-<form>
-  <div class="form-group">
-    <label for="GMIFORM">Podaj Gminę</label>
-    <input type="text" class="form-control" id="GMI" placeholder="Podaj Gminę">
-
-  </div>
-  <div class="form-group">
-    <label for="POW">Jaki Powiat</label>
-    <input type="text" class="form-control" id="POW" placeholder="POW">
-  </div>
- 
-  <button type="submit" class="btn btn-primary">Szukaj</button>
-</form>*@
-
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WOJ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.POW)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GMI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RODZ_GMI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MZ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NAZWA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SYM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SYMPOD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.STAN_NA)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WOJ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.POW)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GMI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RODZ_GMI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MZ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAZWA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SYM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SYMPOD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STAN_NA)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

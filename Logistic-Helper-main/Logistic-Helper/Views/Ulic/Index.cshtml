@@ -1,8 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Terc";
+﻿@using ServiceReference1
+@{
+    ViewData["Title"] = "Ulic";
 }
 
-<h1>Hej, łelkom na Tercu</h1>
+<h1>Hej, łelkom na Ulicy</h1>
 
 
 
@@ -10,20 +11,32 @@
 <div class = "container p-3">
     <div class = "row pt-4">
         <div class= "col-6">
-            <h2 class = "text-primary">Terc List</h2>
+            <h2 class = "text-primary">Ulic List</h2>
 
         </div>
         <div class= "col-6 text-end">
             <a asp-controller="Terc" asp-action= "Search" class = "btn btn-primary"> Search  Terc <i class="bi bi-plus-circle"></i></a>
-
+            
         </div>
     </div>
     <br /><br/>
 </div>
 
-@*Table which shows Category inside*@
+@model List<UlicaDrzewo>
+ 
+    <div class="info bg-info">
+        <h2>@TempData["wojewodztwo"], @TempData["Powiat"], @TempData["nazwa"]</h2>
+        @foreach(var streets in Model )
+        {
+           
+            <p>@streets.Nazwa1</p>
+        }
+    </div>
+}
 
-<table class="table table-bordered table-stripped" style= "width:100%;">
+@*Table which shows Category inside*@
+@*
+table class="table table-bordered table-stripped" style= "width:100%;">
     <thead>
         <tr>
             <th>
@@ -78,4 +91,5 @@
         }
     </tbody>
 
-</table>
+
+</table>*@
