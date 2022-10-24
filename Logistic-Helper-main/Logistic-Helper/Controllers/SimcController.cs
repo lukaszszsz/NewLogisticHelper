@@ -70,7 +70,7 @@ namespace LogisticHelper.Controllers
 
 
 
-                          }).Take(10).ToList();
+                          }).Take(5).ToList();
            
 
 
