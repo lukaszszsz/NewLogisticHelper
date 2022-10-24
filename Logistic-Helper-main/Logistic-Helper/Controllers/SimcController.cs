@@ -22,7 +22,7 @@ namespace LogisticHelper.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
 
-       
+
         public TerytWs1Client connection()
         {
             ServiceReference1.TerytWs1Client client = new ServiceReference1.TerytWs1Client();
@@ -47,7 +47,10 @@ namespace LogisticHelper.Controllers
             //scan them
             var search = (from Simc in objSimcList
                           where
-                           Simc.NAZWA.StartsWith(input)
+
+                            Simc.NAZWA.Contains(input)
+                          orderby Simc.NAZWA.IndexOf(input),
+                                   Simc.NAZWA.Length ascending
                           select new
                           {
 
@@ -67,7 +70,8 @@ namespace LogisticHelper.Controllers
 
 
 
-                          }).Take(5).ToList();
+                          }).Take(10).ToList();
+           
 
 
             string jsson = JsonConvert.SerializeObject(search);
@@ -186,7 +190,7 @@ namespace LogisticHelper.Controllers
             }
 
 
-            //Przenieś to do kontrolera ULIC!!!
+         
 
             //Sending data about Administrative Unit, to show to human
             TempData["wojewodztwo"] = wojewodztwo;
