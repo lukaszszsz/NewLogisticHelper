@@ -94,11 +94,11 @@ namespace LogisticHelper.Controllers
         public IActionResult Search()
         {
 
-            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+           
             
 
 
-            return View(objSimcList);
+            return View();
         }
       
   
