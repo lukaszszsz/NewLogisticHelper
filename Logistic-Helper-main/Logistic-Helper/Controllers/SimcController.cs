@@ -48,13 +48,10 @@ namespace LogisticHelper.Controllers
             var search = (from Simc in objSimcList
                           where
 
-<<<<<<< Updated upstream
-                            Simc.NAZWA.ToLower().Contains(input.ToLower())
-                          orderby Simc.NAZWA.IndexOf(input.ToLower()),
-=======
+                          
                             Simc.NAZWA.Contains(input, StringComparison.InvariantCultureIgnoreCase)
                           orderby Simc.NAZWA.IndexOf(input),
->>>>>>> Stashed changes
+
                                    Simc.NAZWA.Length ascending
                           select new
                           {
