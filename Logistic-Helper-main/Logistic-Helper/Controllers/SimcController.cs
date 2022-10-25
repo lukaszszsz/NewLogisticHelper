@@ -45,11 +45,11 @@ namespace LogisticHelper.Controllers
 
 
             //scan them
-            var search = (from Simc in objSimcList
+          var search = (from Simc in objSimcList
                           where
 
                           
-                            Simc.NAZWA.Contains(input, StringComparison.InvariantCultureIgnoreCase)
+                            Simc.NAZWA.StartsWith(input, StringComparison.InvariantCultureIgnoreCase)
                           orderby Simc.NAZWA.IndexOf(input),
 
                                    Simc.NAZWA.Length ascending
@@ -73,6 +73,7 @@ namespace LogisticHelper.Controllers
 
 
                           }).Take(5).ToList();
+
            
 
 
@@ -87,20 +88,20 @@ namespace LogisticHelper.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+/*        public IActionResult Index()
         {
             IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
             return View(objSimcList);
-        }
+        }*/
 
         public IActionResult Search()
         {
 
-            IEnumerable<Simc> objSimcList = _unitOfWork.Simc.GetAll();
+            
             
 
 
-            return View(objSimcList);
+            return View();
         }
       
   
