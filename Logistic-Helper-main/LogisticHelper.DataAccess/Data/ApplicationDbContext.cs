@@ -15,8 +15,8 @@ namespace LogisticHelper.DataAccess
 
 
         public DbSet<Terc> Tercs { get; set; }
-        public DbSet<Simc> Simcs { get; set; }
         public DbSet<Ulic> Ulics { get; set; }
+        public DbSet<Simc> Simcs { get; set; }
 
        
     }

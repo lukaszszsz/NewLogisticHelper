@@ -14,7 +14,7 @@ namespace LogisticHelper.Repository
         {
             _db = db;
         }
- 
+
 
         public void Update(Ulic obj)
         {
